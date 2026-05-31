@@ -241,7 +241,7 @@ function migrateStudentIds() {
     }
   });
   migrate();
-  console.log(\`[migration] Assigned Student IDs to \${missing.length} students (up to ASS-\${String(counter).padStart(4,'0')})\`);
+  console.log(`[migration] Assigned Student IDs to ${missing.length} students (up to ASS- ${String(counter).padStart(4,'0')})`);
 }
 
 migrateStudentIds();
