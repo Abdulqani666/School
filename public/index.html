@@ -4,478 +4,625 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Abubakar Sadiiq — School</title>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#080d18;
-  --surface:#0f1628;
-  --surface2:#161f35;
-  --surface3:#1c2840;
-  --border:#1e2d4a;
-  --border2:#243454;
-  --accent:#3b82f6;
-  --accent2:#10b981;
-  --warn:#f59e0b;
-  --danger:#ef4444;
-  --text:#e8edf5;
-  --text2:#7a8faa;
-  --text3:#3a4d68;
-  --gold:#f59e0b;
-  --gold2:#fcd34d;
-  --radius:12px;
-  --sidebar-w:228px;
+:root {
+  --bg:       #07090f;
+  --s1:       #0c1018;
+  --s2:       #111622;
+  --s3:       #18202f;
+  --s4:       #1f2a3e;
+  --border:   #1e2d45;
+  --border2:  #263550;
+  --accent:   #3b82f6;
+  --accentd:  #2563eb;
+  --green:    #10b981;
+  --greend:   #059669;
+  --gold:     #f59e0b;
+  --goldd:    #d97706;
+  --gold2:    #fcd34d;
+  --danger:   #ef4444;
+  --text:     #e2eaf5;
+  --text2:    #6b7fa0;
+  --text3:    #2e3d56;
+  --r:        14px;
+  --rr:       20px;
+  --shadow:   0 4px 24px rgba(0,0,0,.5);
+  --shadowl:  0 2px 10px rgba(0,0,0,.3);
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);font-size:15px}
-::-webkit-scrollbar{width:4px;height:4px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  height: 100%;
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
 
-/* ── LOGIN ───────────────────────────────────────────── */
-#loginScreen{
-  min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;
-  background:radial-gradient(ellipse at 30% 40%,rgba(59,130,246,0.07) 0%,transparent 55%),
-             radial-gradient(ellipse at 80% 80%,rgba(245,158,11,0.05) 0%,transparent 50%),
-             var(--bg);
-}
-.login-box{
-  width:100%;max-width:400px;
-  background:var(--surface);
-  border:1px solid var(--border2);
-  border-radius:22px;
-  padding:44px 36px;
-  text-align:center;
-  box-shadow:0 24px 80px rgba(0,0,0,0.5);
-}
-.login-logo{
-  font-family:'Amiri',serif;font-size:2rem;
-  background:linear-gradient(135deg,var(--gold),var(--gold2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  margin-bottom:4px;line-height:1.2;
-}
-.login-sub{font-size:0.75rem;color:var(--text3);margin-bottom:36px;letter-spacing:0.08em;text-transform:uppercase}
-.role-tabs{display:flex;gap:6px;margin-bottom:28px;background:var(--bg);border-radius:12px;padding:4px;border:1px solid var(--border)}
-.role-tab{flex:1;padding:9px;border:none;background:transparent;color:var(--text2);border-radius:9px;cursor:pointer;font-size:0.82rem;font-family:inherit;transition:all 0.2s;font-weight:500}
-.role-tab.active{background:linear-gradient(135deg,var(--accent),#2563eb);color:#fff;font-weight:700;box-shadow:0 4px 12px rgba(59,130,246,0.3)}
-.inp{
-  width:100%;padding:13px 16px;
-  background:var(--bg);border:1px solid var(--border2);
-  border-radius:11px;color:var(--text);font-family:inherit;font-size:0.93rem;
-  margin-bottom:12px;outline:none;transition:border-color 0.2s,box-shadow 0.2s;
-}
-.inp:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(59,130,246,0.15)}
-.btn-primary{
-  width:100%;padding:14px;
-  background:linear-gradient(135deg,var(--gold),#d97706);
-  border:none;border-radius:11px;color:#000;font-family:inherit;
-  font-size:0.95rem;font-weight:800;cursor:pointer;
-  transition:opacity 0.2s,transform 0.1s;margin-top:4px;
-  letter-spacing:0.02em;
-}
-.btn-primary:hover{opacity:0.9;transform:translateY(-1px)}
-.btn-primary:active{transform:translateY(0)}
-.login-err{color:var(--danger);font-size:0.82rem;margin-top:10px;min-height:18px}
-.login-toggle{margin-top:18px;font-size:0.82rem;color:var(--text2)}
-.login-toggle span{color:var(--accent);cursor:pointer;font-weight:600}
-
-/* ── APP SHELL ───────────────────────────────────────── */
-#appShell{display:none;height:100vh;flex-direction:column}
-
-/* ── TOP BAR ─────────────────────────────────────────── */
-.topbar{
-  background:var(--surface);
-  border-bottom:1px solid var(--border);
-  padding:0 20px;height:58px;
-  display:flex;align-items:center;gap:12px;flex-shrink:0;
-  box-shadow:0 1px 0 var(--border);
-}
-.topbar-hamburger{
-  display:none;
-  background:rgba(245,158,11,0.1);
-  border:1px solid rgba(245,158,11,0.2);
-  border-radius:9px;width:38px;height:38px;
-  flex-direction:column;align-items:center;justify-content:center;gap:4px;
-  cursor:pointer;flex-shrink:0;
-}
-.topbar-hamburger span{width:16px;height:2px;background:var(--gold);border-radius:2px;transition:all 0.2s;display:block}
-.topbar-hamburger span:nth-child(2){width:11px}
-.topbar-title{
-  font-family:'Amiri',serif;font-size:1.2rem;
-  background:linear-gradient(90deg,var(--gold),var(--gold2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  flex:1;
-}
-.topbar-user{font-size:0.76rem;color:var(--text2)}
-.topbar-role{
-  font-size:0.68rem;padding:4px 10px;border-radius:20px;font-weight:800;
-  background:linear-gradient(135deg,var(--accent),#2563eb);color:#fff;
-  text-transform:uppercase;letter-spacing:0.06em;
-}
-.topbar-role.teacher{background:linear-gradient(135deg,var(--accent2),#059669)}
-.topbar-role.superior{background:linear-gradient(135deg,var(--gold),#d97706);color:#000}
-.btn-icon{
-  background:transparent;border:1px solid var(--border2);
-  border-radius:8px;color:var(--text2);padding:7px 12px;
-  cursor:pointer;font-size:0.8rem;font-family:inherit;
-  transition:all 0.18s;font-weight:500;
-}
-.btn-icon:hover{background:var(--surface2);color:var(--text);border-color:var(--border2)}
-
-/* ── LAYOUT ──────────────────────────────────────────── */
-.main-layout{display:flex;flex:1;overflow:hidden}
-
-/* ── SIDEBAR ─────────────────────────────────────────── */
-.sidebar{
-  width:var(--sidebar-w);
-  background:var(--surface);
-  border-right:1px solid var(--border);
-  padding:10px 8px 20px;flex-shrink:0;
-  overflow-y:auto;display:flex;flex-direction:column;gap:1px;
-}
-.nav-section{
-  font-size:0.62rem;color:var(--text3);
-  text-transform:uppercase;letter-spacing:0.1em;
-  padding:14px 12px 5px;font-weight:700;
-}
-.nav-item{
-  display:flex;align-items:center;gap:10px;
-  padding:10px 13px;border-radius:10px;
-  cursor:pointer;color:var(--text2);font-size:0.85rem;
-  transition:all 0.15s;border:none;background:transparent;
-  width:100%;text-align:left;font-family:inherit;font-weight:500;
-  border-left:3px solid transparent;
-}
-.nav-item:hover{background:var(--surface2);color:var(--text)}
-.nav-item.active{
-  background:linear-gradient(135deg,rgba(245,158,11,0.15),rgba(217,119,6,0.08));
-  color:var(--gold2);font-weight:700;
-  border-left:3px solid var(--gold);
-}
-.nav-icon{font-size:1rem;min-width:20px;text-align:center}
-
-/* Mobile sidebar overlay */
-.sidebar-overlay{
-  display:none;position:fixed;inset:0;
-  background:rgba(0,0,0,0.65);z-index:290;
-  backdrop-filter:blur(2px);
-}
-.sidebar-overlay.open{display:block}
-
-/* ── CONTENT ─────────────────────────────────────────── */
-.content{flex:1;overflow-y:auto;padding:22px 20px}
-.page{display:none}
-.page.active{display:block}
-.page-title{
-  font-family:'Amiri',serif;font-size:1.6rem;
-  background:linear-gradient(90deg,var(--gold),var(--gold2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  margin-bottom:4px;
-}
-.page-sub{font-size:0.8rem;color:var(--text2);margin-bottom:22px}
-
-/* ── STATS ───────────────────────────────────────────── */
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:12px;margin-bottom:26px}
-.stat-card{
-  background:var(--surface);border:1px solid var(--border2);
-  border-radius:var(--radius);padding:18px 16px;
-  position:relative;overflow:hidden;
-}
-.stat-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--accent),transparent);
-}
-.stat-num{
-  font-family:'IBM Plex Mono',monospace;font-size:2rem;font-weight:600;
-  color:var(--accent);line-height:1;
-}
-.stat-label{font-size:0.7rem;color:var(--text2);text-transform:uppercase;letter-spacing:0.07em;margin-top:4px}
-
-/* ── FILTER BAR ──────────────────────────────────────── */
-.filter-bar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
-.search-inp{
-  flex:1;min-width:160px;padding:10px 14px;
-  background:var(--surface);border:1px solid var(--border2);
-  border-radius:10px;color:var(--text);font-family:inherit;font-size:0.87rem;outline:none;
-  transition:border-color 0.2s;
-}
-.search-inp:focus{border-color:var(--accent)}
-select.filter-sel{
-  padding:10px 12px;background:var(--surface);border:1px solid var(--border2);
-  border-radius:10px;color:var(--text);font-family:inherit;font-size:0.87rem;outline:none;cursor:pointer;
-}
-select.filter-sel:focus{border-color:var(--accent)}
-
-/* ── TABLE ───────────────────────────────────────────── */
-.table-wrap{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius);overflow:hidden;
-}
-table{width:100%;border-collapse:collapse}
-th{
-  background:var(--surface2);padding:11px 14px;text-align:left;
-  font-size:0.7rem;color:var(--text2);text-transform:uppercase;
-  letter-spacing:0.07em;border-bottom:1px solid var(--border);white-space:nowrap;
-  font-weight:700;
-}
-td{padding:11px 14px;border-bottom:1px solid var(--border);font-size:0.84rem;vertical-align:middle}
-tr:last-child td{border-bottom:none}
-tr:hover td{background:var(--surface2)}
-.badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:0.7rem;font-weight:700}
-.badge-boy{background:rgba(59,130,246,0.15);color:#60a5fa;border:1px solid rgba(59,130,246,0.2)}
-.badge-girl{background:rgba(236,72,153,0.12);color:#f0abfc;border:1px solid rgba(236,72,153,0.2)}
-.btn-sm{
-  padding:5px 11px;border-radius:8px;border:1px solid var(--border2);
-  background:transparent;color:var(--text2);font-family:inherit;font-size:0.75rem;
-  cursor:pointer;transition:all 0.15s;font-weight:500;
-}
-.btn-sm:hover{background:var(--surface2);color:var(--text)}
-.btn-sm.danger:hover{border-color:var(--danger);color:var(--danger)}
-.pagination{display:flex;gap:6px;align-items:center;justify-content:center;margin-top:14px;flex-wrap:wrap}
-.pg-btn{
-  padding:6px 13px;border-radius:8px;border:1px solid var(--border);
-  background:var(--surface);color:var(--text2);font-family:inherit;font-size:0.8rem;cursor:pointer;transition:all 0.15s;
-}
-.pg-btn:hover,.pg-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-.pg-info{font-size:0.78rem;color:var(--text2)}
-
-/* ── MODAL ───────────────────────────────────────────── */
-.modal-overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:400;
-  display:none;align-items:center;justify-content:center;padding:16px;
-  backdrop-filter:blur(3px);
-}
-.modal-overlay.open{display:flex}
-.modal-box{
-  background:var(--surface);border:1px solid var(--border2);
-  border-radius:18px;padding:30px 26px;
-  width:100%;max-width:480px;max-height:90vh;overflow-y:auto;
-  box-shadow:0 24px 80px rgba(0,0,0,0.6);
-}
-.modal-title{
-  font-family:'Amiri',serif;font-size:1.4rem;
-  background:linear-gradient(90deg,var(--gold),var(--gold2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  margin-bottom:22px;
-}
-.form-row{margin-bottom:15px}
-.form-label{
-  display:block;font-size:0.75rem;color:var(--text2);
-  margin-bottom:6px;text-transform:uppercase;letter-spacing:0.06em;font-weight:700;
-}
-.form-inp{
-  width:100%;padding:11px 13px;background:var(--bg);
-  border:1px solid var(--border2);border-radius:10px;
-  color:var(--text);font-family:inherit;font-size:0.9rem;outline:none;transition:border-color 0.2s;
-}
-.form-inp:focus{border-color:var(--accent)}
-.modal-actions{display:flex;gap:10px;margin-top:22px}
-.btn-cancel{
-  flex:1;padding:12px;border:1px solid var(--border2);border-radius:10px;
-  background:transparent;color:var(--text2);font-family:inherit;font-size:0.9rem;cursor:pointer;
-  transition:all 0.15s;font-weight:500;
-}
-.btn-cancel:hover{background:var(--surface2);color:var(--text)}
-.btn-save{
-  flex:2;padding:12px;border:none;border-radius:10px;
-  background:linear-gradient(135deg,var(--accent),#2563eb);color:#fff;
-  font-family:inherit;font-size:0.9rem;font-weight:700;cursor:pointer;
-  transition:opacity 0.2s;letter-spacing:0.02em;
-}
-.btn-save:hover{opacity:0.9}
-
-/* ── DETAIL ──────────────────────────────────────────── */
-.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-.detail-item{background:var(--surface2);border-radius:10px;padding:12px;border:1px solid var(--border)}
-.detail-key{font-size:0.68rem;color:var(--text2);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:4px;font-weight:700}
-.detail-val{font-size:0.9rem;color:var(--text)}
-
-/* ── ATTENDANCE ──────────────────────────────────────── */
-.att-controls{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
-.att-date-inp{
-  padding:10px 13px;background:var(--surface);border:1px solid var(--border2);
-  border-radius:10px;color:var(--text);font-family:inherit;font-size:0.87rem;outline:none;
-}
-.att-student-row{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--border)}
-.att-student-row:last-child{border-bottom:none}
-.att-name{flex:1;font-size:0.88rem;font-weight:500}
-.att-toggle{display:flex;gap:4px}
-.att-btn{
-  padding:6px 12px;border-radius:8px;border:1px solid var(--border);
-  background:transparent;font-family:inherit;font-size:0.77rem;cursor:pointer;
-  transition:all 0.15s;color:var(--text2);font-weight:500;
-}
-.att-btn.present.active{background:rgba(16,185,129,0.2);color:#34d399;border-color:#10b981}
-.att-btn.absent.active{background:rgba(239,68,68,0.2);color:#fca5a5;border-color:#ef4444}
-.att-btn.late.active{background:rgba(245,158,11,0.2);color:#fcd34d;border-color:#f59e0b}
-.att-save-btn{
-  padding:10px 20px;
-  background:linear-gradient(135deg,var(--accent),#2563eb);
-  border:none;border-radius:10px;color:#fff;font-family:inherit;
-  font-size:0.87rem;font-weight:700;cursor:pointer;transition:opacity 0.2s;
-}
-.att-save-btn:hover{opacity:0.88}
-.att-summary{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
-.att-chip{padding:5px 14px;border-radius:20px;font-size:0.77rem;font-weight:700}
-
-/* ── EXAM ENTRY ──────────────────────────────────────── */
-.exam-controls{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:8px;margin-bottom:16px;align-items:end}
-.exam-mark-row{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--border)}
-.exam-mark-row:last-child{border-bottom:none}
-.exam-mark-name{flex:1;font-size:0.88rem;font-weight:500}
-.exam-mark-inp{
-  width:80px;padding:7px 10px;background:var(--bg);
-  border:1px solid var(--border2);border-radius:8px;
-  color:var(--text);font-family:inherit;font-size:0.87rem;text-align:center;outline:none;
-}
-.exam-mark-inp:focus{border-color:var(--accent)}
-
-/* ── EXAM RESULTS ────────────────────────────────────── */
-.results-controls{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
-.class-sheet-tab{
-  padding:7px 14px;border-radius:20px;border:1px solid var(--border2);
-  background:transparent;color:var(--text2);font-family:inherit;font-size:0.79rem;
-  cursor:pointer;transition:all 0.15s;font-weight:500;
-}
-.class-sheet-tab:hover{background:var(--surface2);color:var(--text)}
-.class-sheet-tab.active{
-  background:linear-gradient(135deg,var(--gold),#d97706);
-  color:#000;border-color:var(--gold);font-weight:700;
+/* ─── AMBIENT BACKGROUND ──────────────────────────── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 40% at 15% 10%, rgba(59,130,246,.07) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 35% at 85% 85%, rgba(245,158,11,.05) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 30% at 50% 50%, rgba(16,185,129,.03) 0%, transparent 60%);
 }
 
-/* ── TOAST ───────────────────────────────────────────── */
-#toast{
-  position:fixed;bottom:28px;left:50%;
-  transform:translateX(-50%) translateY(90px);
-  background:var(--surface2);border:1px solid var(--border2);
-  border-radius:12px;padding:11px 22px;font-size:0.84rem;z-index:999;
-  transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
-  white-space:nowrap;box-shadow:0 8px 32px rgba(0,0,0,0.4);font-weight:500;
+/* ─── LOGIN ──────────────────────────────────────── */
+#loginScreen {
+  min-height: 100vh; display: flex;
+  align-items: center; justify-content: center;
+  padding: 24px; position: relative; z-index: 1;
 }
-#toast.show{transform:translateX(-50%) translateY(0)}
-#toast.success{border-color:var(--accent2);color:#34d399}
-#toast.error{border-color:var(--danger);color:#fca5a5}
+.login-box {
+  width: 100%; max-width: 420px;
+  background: linear-gradient(145deg, var(--s1), var(--s2));
+  border: 1px solid var(--border2);
+  border-radius: var(--rr);
+  padding: 48px 40px;
+  text-align: center;
+  box-shadow: 0 32px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.03);
+  position: relative; overflow: hidden;
+}
+.login-box::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), var(--accent), transparent);
+}
+.login-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; font-weight: 700;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 6px; line-height: 1.2;
+}
+.login-sub {
+  font-size: .72rem; color: var(--text3);
+  margin-bottom: 36px; letter-spacing: .1em; text-transform: uppercase; font-weight: 500;
+}
+.role-tabs {
+  display: flex; gap: 6px; margin-bottom: 28px;
+  background: var(--bg); border-radius: 12px; padding: 4px;
+  border: 1px solid var(--border);
+}
+.role-tab {
+  flex: 1; padding: 10px 6px; border: none; background: transparent;
+  color: var(--text2); border-radius: 9px; cursor: pointer;
+  font-size: .82rem; font-family: inherit; transition: all .2s; font-weight: 500;
+}
+.role-tab.active {
+  background: linear-gradient(135deg, var(--gold), var(--goldd));
+  color: #000; font-weight: 700;
+  box-shadow: 0 4px 14px rgba(245,158,11,.35);
+}
+.inp {
+  width: 100%; padding: 13px 16px;
+  background: var(--bg); border: 1px solid var(--border2);
+  border-radius: 11px; color: var(--text); font-family: inherit;
+  font-size: .93rem; margin-bottom: 12px; outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.inp:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(245,158,11,.12); }
+.btn-primary {
+  width: 100%; padding: 14px;
+  background: linear-gradient(135deg, var(--gold), var(--goldd));
+  border: none; border-radius: 11px; color: #000; font-family: inherit;
+  font-size: .95rem; font-weight: 800; cursor: pointer;
+  transition: all .2s; margin-top: 4px; letter-spacing: .02em;
+  box-shadow: 0 6px 20px rgba(245,158,11,.3);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(245,158,11,.4); }
+.btn-primary:active { transform: translateY(0); }
+.login-err { color: var(--danger); font-size: .82rem; margin-top: 10px; min-height: 18px; }
+.login-toggle { margin-top: 18px; font-size: .82rem; color: var(--text2); }
+.login-toggle span { color: var(--gold); cursor: pointer; font-weight: 600; }
 
-/* ── PAYMENT ─────────────────────────────────────────── */
-.pay-row{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--border)}
-.pay-row:last-child{border-bottom:none}
-.pay-name{flex:1;font-size:0.88rem;font-weight:500}
-.pay-amount{font-family:'IBM Plex Mono',monospace;font-size:0.82rem;color:var(--text2);min-width:36px;text-align:right}
-.pay-toggle{display:flex;gap:4px}
-.pay-btn{
-  padding:5px 11px;border-radius:7px;border:1px solid var(--border);
-  background:transparent;font-family:inherit;font-size:0.74rem;cursor:pointer;
-  transition:all 0.15s;color:var(--text2);font-weight:500;
-}
-.pay-btn.paid.active{background:rgba(16,185,129,0.2);color:#34d399;border-color:#10b981}
-.pay-btn.unpaid.active{background:rgba(239,68,68,0.15);color:#fca5a5;border-color:#ef4444}
-.pay-btn.free.active{background:rgba(59,130,246,0.15);color:#60a5fa;border-color:#3b82f6}
+/* ─── APP SHELL ──────────────────────────────────── */
+#appShell { display: none; height: 100vh; flex-direction: column; position: relative; z-index: 1; }
 
-/* ── CLASS CHIPS ─────────────────────────────────────── */
-.class-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
-.class-chip{
-  padding:6px 13px;border-radius:20px;border:1px solid var(--border2);
-  background:var(--surface);color:var(--text2);font-size:0.77rem;
-  cursor:pointer;transition:all 0.15s;font-family:inherit;font-weight:500;
+/* ─── TOPBAR ─────────────────────────────────────── */
+.topbar {
+  background: rgba(12,16,24,.95);
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px; height: 60px;
+  display: flex; align-items: center; gap: 14px; flex-shrink: 0;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 var(--border), 0 4px 20px rgba(0,0,0,.4);
+  position: relative; z-index: 50;
 }
-.class-chip:hover{background:var(--surface2);color:var(--text)}
-.class-chip.active{
-  background:linear-gradient(135deg,var(--gold),#d97706);
-  color:#000;border-color:var(--gold);font-weight:700;
+.topbar-hamburger {
+  display: none;
+  background: rgba(245,158,11,.1);
+  border: 1px solid rgba(245,158,11,.25);
+  border-radius: 10px; width: 40px; height: 40px;
+  flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+  cursor: pointer; flex-shrink: 0; transition: all .2s;
+}
+.topbar-hamburger:hover { background: rgba(245,158,11,.18); }
+.topbar-hamburger span {
+  display: block; height: 2px; background: var(--gold);
+  border-radius: 2px; transition: all .2s;
+}
+.topbar-hamburger span:nth-child(1) { width: 18px; }
+.topbar-hamburger span:nth-child(2) { width: 12px; }
+.topbar-hamburger span:nth-child(3) { width: 18px; }
+.topbar-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem; font-weight: 700;
+  background: linear-gradient(90deg, var(--gold), var(--gold2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  flex: 1; letter-spacing: .01em;
+}
+.topbar-user { font-size: .75rem; color: var(--text2); font-weight: 500; }
+.topbar-role {
+  font-size: .67rem; padding: 5px 12px; border-radius: 20px;
+  font-weight: 800; text-transform: uppercase; letter-spacing: .06em;
+  background: linear-gradient(135deg, var(--accent), var(--accentd));
+  color: #fff; box-shadow: 0 2px 8px rgba(59,130,246,.3);
+}
+.topbar-role.teacher { background: linear-gradient(135deg, var(--green), var(--greend)); box-shadow: 0 2px 8px rgba(16,185,129,.3); }
+.topbar-role.superior { background: linear-gradient(135deg, var(--gold), var(--goldd)); color: #000; box-shadow: 0 2px 8px rgba(245,158,11,.3); }
+.btn-icon {
+  background: transparent; border: 1px solid var(--border2);
+  border-radius: 9px; color: var(--text2); padding: 8px 14px;
+  cursor: pointer; font-size: .8rem; font-family: inherit;
+  transition: all .18s; font-weight: 600;
+}
+.btn-icon:hover { background: var(--s3); color: var(--text); border-color: var(--border2); }
+
+/* ─── LAYOUT ─────────────────────────────────────── */
+.main-layout { display: flex; flex: 1; overflow: hidden; }
+
+/* ─── SIDEBAR ────────────────────────────────────── */
+.sidebar {
+  width: 230px; flex-shrink: 0;
+  background: linear-gradient(180deg, var(--s1) 0%, var(--s2) 100%);
+  border-right: 1px solid var(--border);
+  padding: 16px 10px 24px; overflow-y: auto;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.nav-section {
+  font-size: .6rem; color: var(--text3);
+  text-transform: uppercase; letter-spacing: .12em;
+  padding: 16px 14px 6px; font-weight: 700;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 11px;
+  padding: 11px 14px; border-radius: 11px; cursor: pointer;
+  color: var(--text2); font-size: .86rem; font-weight: 500;
+  transition: all .15s; border: none; background: transparent;
+  width: 100%; text-align: left; font-family: inherit;
+  border-left: 3px solid transparent;
+  position: relative;
+}
+.nav-item:hover { background: var(--s3); color: var(--text); }
+.nav-item.active {
+  background: linear-gradient(135deg, rgba(245,158,11,.14), rgba(217,119,6,.07));
+  color: var(--gold2); font-weight: 700;
+  border-left: 3px solid var(--gold);
+}
+.nav-item.active::after {
+  content: ''; position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--gold); box-shadow: 0 0 8px var(--gold);
+}
+.nav-icon { font-size: .95rem; min-width: 20px; text-align: center; }
+
+/* Sidebar overlay */
+.sidebar-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.7); z-index: 290;
+  backdrop-filter: blur(3px);
+}
+.sidebar-overlay.open { display: block; }
+
+/* ─── CONTENT ────────────────────────────────────── */
+.content { flex: 1; overflow-y: auto; padding: 28px 22px; }
+.page { display: none; }
+.page.active { display: block; animation: pageIn .2s ease; }
+@keyframes pageIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.7rem; font-weight: 700;
+  background: linear-gradient(90deg, var(--gold), var(--gold2) 60%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 4px; line-height: 1.2;
+}
+.page-sub { font-size: .8rem; color: var(--text2); margin-bottom: 24px; font-weight: 400; }
+
+/* ─── STAT CARDS ─────────────────────────────────── */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap: 14px; margin-bottom: 28px; }
+.stat-card {
+  background: linear-gradient(145deg, var(--s2), var(--s3));
+  border: 1px solid var(--border2); border-radius: var(--r);
+  padding: 20px 18px; position: relative; overflow: hidden;
+  transition: transform .2s, box-shadow .2s;
+  box-shadow: var(--shadowl);
+}
+.stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.stat-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  border-radius: var(--r) var(--r) 0 0;
+}
+.stat-card::after {
+  content: ''; position: absolute;
+  bottom: -20px; right: -20px;
+  width: 80px; height: 80px; border-radius: 50%;
+  background: rgba(59,130,246,.04);
+}
+.stat-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2.1rem; font-weight: 600; color: var(--accent);
+  line-height: 1; margin-bottom: 6px;
+}
+.stat-label { font-size: .68rem; color: var(--text2); text-transform: uppercase; letter-spacing: .08em; font-weight: 600; }
+
+/* ─── FILTER BAR ─────────────────────────────────── */
+.filter-bar { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; align-items: center; }
+.search-inp {
+  flex: 1; min-width: 160px; padding: 11px 16px;
+  background: var(--s2); border: 1px solid var(--border2);
+  border-radius: 11px; color: var(--text); font-family: inherit;
+  font-size: .87rem; outline: none; transition: all .2s;
+}
+.search-inp:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(245,158,11,.1); }
+select.filter-sel {
+  padding: 11px 14px; background: var(--s2); border: 1px solid var(--border2);
+  border-radius: 11px; color: var(--text); font-family: inherit;
+  font-size: .87rem; outline: none; cursor: pointer; transition: all .2s;
+}
+select.filter-sel:focus { border-color: var(--gold); }
+
+/* ─── TABLE ──────────────────────────────────────── */
+.table-wrap {
+  background: var(--s1); border: 1px solid var(--border);
+  border-radius: var(--r); overflow: hidden;
+  box-shadow: var(--shadowl);
+}
+table { width: 100%; border-collapse: collapse; }
+th {
+  background: var(--s3); padding: 12px 16px; text-align: left;
+  font-size: .68rem; color: var(--text2); text-transform: uppercase;
+  letter-spacing: .09em; border-bottom: 1px solid var(--border);
+  font-weight: 700; white-space: nowrap;
+}
+td { padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: .84rem; vertical-align: middle; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255,255,255,.025); }
+.badge {
+  display: inline-block; padding: 3px 10px; border-radius: 20px;
+  font-size: .7rem; font-weight: 700; letter-spacing: .03em;
+}
+.badge-boy { background: rgba(59,130,246,.15); color: #60a5fa; border: 1px solid rgba(59,130,246,.25); }
+.badge-girl { background: rgba(236,72,153,.12); color: #f0abfc; border: 1px solid rgba(236,72,153,.2); }
+
+.btn-sm {
+  padding: 6px 12px; border-radius: 9px; border: 1px solid var(--border2);
+  background: transparent; color: var(--text2); font-family: inherit;
+  font-size: .75rem; cursor: pointer; transition: all .15s; font-weight: 600;
+}
+.btn-sm:hover { background: var(--s3); color: var(--text); }
+.btn-sm.danger:hover { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,.08); }
+
+.pagination { display: flex; gap: 6px; align-items: center; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+.pg-btn {
+  padding: 7px 14px; border-radius: 9px; border: 1px solid var(--border);
+  background: var(--s2); color: var(--text2); font-family: inherit;
+  font-size: .8rem; cursor: pointer; transition: all .15s; font-weight: 500;
+}
+.pg-btn:hover, .pg-btn.active { background: var(--gold); color: #000; border-color: var(--gold); font-weight: 700; }
+.pg-info { font-size: .78rem; color: var(--text2); }
+
+/* ─── MODAL ──────────────────────────────────────── */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.8); z-index: 400;
+  display: none; align-items: center; justify-content: center; padding: 16px;
+  backdrop-filter: blur(6px);
+}
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: linear-gradient(145deg, var(--s2), var(--s3));
+  border: 1px solid var(--border2); border-radius: var(--rr);
+  padding: 32px 28px; width: 100%; max-width: 480px;
+  max-height: 90vh; overflow-y: auto;
+  box-shadow: 0 40px 100px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.04);
+  position: relative;
+}
+.modal-box::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  border-radius: var(--rr) var(--rr) 0 0;
+}
+.modal-title {
+  font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700;
+  background: linear-gradient(90deg, var(--gold), var(--gold2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 24px;
+}
+.form-row { margin-bottom: 16px; }
+.form-label {
+  display: block; font-size: .72rem; color: var(--text2);
+  margin-bottom: 7px; text-transform: uppercase; letter-spacing: .07em; font-weight: 700;
+}
+.form-inp {
+  width: 100%; padding: 12px 14px; background: var(--bg);
+  border: 1px solid var(--border2); border-radius: 10px;
+  color: var(--text); font-family: inherit; font-size: .9rem; outline: none; transition: all .2s;
+}
+.form-inp:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(245,158,11,.1); }
+.modal-actions { display: flex; gap: 10px; margin-top: 24px; }
+.btn-cancel {
+  flex: 1; padding: 12px; border: 1px solid var(--border2); border-radius: 11px;
+  background: transparent; color: var(--text2); font-family: inherit;
+  font-size: .9rem; cursor: pointer; transition: all .15s; font-weight: 500;
+}
+.btn-cancel:hover { background: var(--s3); color: var(--text); }
+.btn-save {
+  flex: 2; padding: 12px; border: none; border-radius: 11px;
+  background: linear-gradient(135deg, var(--gold), var(--goldd));
+  color: #000; font-family: inherit; font-size: .9rem; font-weight: 800;
+  cursor: pointer; transition: all .2s; letter-spacing: .02em;
+  box-shadow: 0 4px 16px rgba(245,158,11,.3);
+}
+.btn-save:hover { opacity: .9; transform: translateY(-1px); }
+
+/* ─── DETAIL ─────────────────────────────────────── */
+.detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+.detail-item { background: var(--s3); border-radius: 10px; padding: 13px; border: 1px solid var(--border); }
+.detail-key { font-size: .67rem; color: var(--text2); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 4px; font-weight: 700; }
+.detail-val { font-size: .9rem; color: var(--text); font-weight: 500; }
+
+/* ─── ATTENDANCE ─────────────────────────────────── */
+.att-controls { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; align-items: center; }
+.att-date-inp {
+  padding: 11px 14px; background: var(--s2); border: 1px solid var(--border2);
+  border-radius: 11px; color: var(--text); font-family: inherit; font-size: .87rem; outline: none;
+  transition: border-color .2s;
+}
+.att-date-inp:focus { border-color: var(--gold); }
+.att-student-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px; border-bottom: 1px solid var(--border);
+  transition: background .15s;
+}
+.att-student-row:last-child { border-bottom: none; }
+.att-student-row:hover { background: rgba(255,255,255,.02); }
+.att-name { flex: 1; font-size: .88rem; font-weight: 500; }
+.att-toggle { display: flex; gap: 5px; }
+.att-btn {
+  padding: 6px 13px; border-radius: 8px; border: 1px solid var(--border);
+  background: transparent; font-family: inherit; font-size: .77rem;
+  cursor: pointer; transition: all .15s; color: var(--text2); font-weight: 600;
+}
+.att-btn.present.active { background: rgba(16,185,129,.2); color: #34d399; border-color: var(--green); }
+.att-btn.absent.active  { background: rgba(239,68,68,.18); color: #fca5a5; border-color: var(--danger); }
+.att-btn.late.active    { background: rgba(245,158,11,.2); color: var(--gold2); border-color: var(--gold); }
+.att-save-btn {
+  padding: 11px 22px;
+  background: linear-gradient(135deg, var(--accent), var(--accentd));
+  border: none; border-radius: 11px; color: #fff; font-family: inherit;
+  font-size: .87rem; font-weight: 700; cursor: pointer; transition: all .2s;
+  box-shadow: 0 4px 14px rgba(59,130,246,.3);
+}
+.att-save-btn:hover { opacity: .9; transform: translateY(-1px); }
+.att-summary { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+.att-chip { padding: 5px 14px; border-radius: 20px; font-size: .77rem; font-weight: 700; }
+
+/* ─── EXAM ENTRY ─────────────────────────────────── */
+.exam-controls { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 10px; margin-bottom: 18px; align-items: end; }
+.exam-mark-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 16px; border-bottom: 1px solid var(--border);
+  transition: background .15s;
+}
+.exam-mark-row:last-child { border-bottom: none; }
+.exam-mark-row:hover { background: rgba(255,255,255,.02); }
+.exam-mark-name { flex: 1; font-size: .88rem; font-weight: 500; }
+.exam-mark-inp {
+  width: 80px; padding: 8px 10px; background: var(--bg);
+  border: 1px solid var(--border2); border-radius: 9px;
+  color: var(--text); font-family: inherit; font-size: .88rem;
+  text-align: center; outline: none; transition: all .2s;
+}
+.exam-mark-inp:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(245,158,11,.1); }
+
+/* ─── EXAM RESULTS ───────────────────────────────── */
+.results-controls { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.class-sheet-tab {
+  padding: 8px 16px; border-radius: 20px; border: 1px solid var(--border2);
+  background: transparent; color: var(--text2); font-family: inherit;
+  font-size: .79rem; cursor: pointer; transition: all .15s; font-weight: 600;
+}
+.class-sheet-tab:hover { background: var(--s3); color: var(--text); }
+.class-sheet-tab.active {
+  background: linear-gradient(135deg, var(--gold), var(--goldd));
+  color: #000; border-color: var(--gold); font-weight: 700;
+  box-shadow: 0 3px 10px rgba(245,158,11,.3);
 }
 
-/* ── CLASS MANAGEMENT ────────────────────────────────── */
-.class-card{
-  background:var(--surface);border:1px solid var(--border2);
-  border-radius:var(--radius);padding:14px 16px;
-  display:flex;align-items:center;gap:12px;margin-bottom:8px;
-  transition:border-color 0.15s;
+/* ─── TAB SWITCHERS ──────────────────────────────── */
+.tab-bar {
+  display: flex; gap: 5px; margin-bottom: 20px;
+  background: var(--bg); border-radius: 13px; padding: 5px;
+  border: 1px solid var(--border);
 }
-.class-card:hover{border-color:var(--border2)}
-.class-card-name{flex:1;font-weight:700;font-size:0.95rem}
-.class-card-meta{font-size:0.75rem;color:var(--text2)}
-.class-card-count{font-family:'IBM Plex Mono',monospace;font-size:1.1rem;font-weight:700;color:var(--accent);min-width:32px;text-align:center}
-.class-card-actions{display:flex;gap:6px}
-.status-chip{display:inline-block;padding:3px 9px;border-radius:20px;font-size:0.7rem;font-weight:700}
-.status-active{background:rgba(16,185,129,0.15);color:#34d399;border:1px solid rgba(16,185,129,0.25)}
-.status-archived{background:rgba(100,116,139,0.15);color:#94a3b8;border:1px solid rgba(100,116,139,0.2)}
-
-/* ── AUDIT LOG ───────────────────────────────────────── */
-.audit-preset{
-  padding:5px 12px;border-radius:20px;border:1px solid var(--border2);
-  background:transparent;color:var(--text2);font-family:inherit;font-size:0.75rem;
-  cursor:pointer;transition:all 0.15s;font-weight:500;
+.tab-bar button {
+  flex: 1; padding: 10px 6px; border: none; border-radius: 9px;
+  font-family: inherit; font-size: .82rem; cursor: pointer; transition: all .2s;
+  font-weight: 500; color: var(--text2); background: transparent;
 }
-.audit-preset:hover{background:var(--surface2);color:var(--text)}
-.audit-preset.active{background:linear-gradient(135deg,var(--accent),#2563eb);color:#fff;border-color:var(--accent)}
-.audit-action-badge{
-  display:inline-block;padding:2px 8px;border-radius:5px;
-  font-size:0.67rem;font-weight:700;font-family:'IBM Plex Mono',monospace;letter-spacing:0.04em;
+.tab-bar button.active {
+  background: linear-gradient(135deg, var(--accent), var(--accentd));
+  color: #fff; font-weight: 700; box-shadow: 0 3px 12px rgba(59,130,246,.3);
 }
 
-/* ── BACKUP ──────────────────────────────────────────── */
-.backup-row{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--border)}
-.backup-row:last-child{border-bottom:none}
-.backup-name{flex:1;font-family:'IBM Plex Mono',monospace;font-size:0.8rem;color:var(--text)}
-.backup-meta{font-size:0.75rem;color:var(--text2);white-space:nowrap}
-.backup-actions{display:flex;gap:6px}
-.btn-restore{
-  padding:5px 12px;border-radius:8px;border:1px solid var(--accent);
-  background:transparent;color:var(--accent);font-family:inherit;font-size:0.75rem;cursor:pointer;transition:all 0.15s;font-weight:600;
+/* ─── CLASS CHIPS ────────────────────────────────── */
+.class-chips { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 18px; }
+.class-chip {
+  padding: 7px 14px; border-radius: 20px; border: 1px solid var(--border2);
+  background: var(--s2); color: var(--text2); font-size: .78rem;
+  cursor: pointer; transition: all .15s; font-family: inherit; font-weight: 500;
 }
-.btn-restore:hover{background:var(--accent);color:#fff}
-.btn-del{
-  padding:5px 10px;border-radius:8px;border:1px solid var(--border);
-  background:transparent;color:var(--text3);font-family:inherit;font-size:0.75rem;cursor:pointer;transition:all 0.15s;
-}
-.btn-del:hover{border-color:var(--danger);color:var(--danger)}
-
-/* ── EMPTY STATE ─────────────────────────────────────── */
-.empty-state{text-align:center;padding:44px 20px;color:var(--text2)}
-.empty-icon{font-size:2.8rem;margin-bottom:12px}
-.empty-text{font-size:0.88rem;color:var(--text2)}
-
-/* ── WARNING BANNER ──────────────────────────────────── */
-.default-pw-banner{
-  margin:12px 20px 0;
-  background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(217,119,6,0.07));
-  border:1px solid rgba(245,158,11,0.3);border-radius:12px;
-  padding:11px 16px;display:flex;align-items:center;gap:10px;
-  font-size:0.84rem;color:var(--gold2);font-weight:500;
-}
-.default-pw-banner a{
-  color:var(--gold);font-weight:700;cursor:pointer;text-decoration:underline;white-space:nowrap;
+.class-chip:hover { background: var(--s3); color: var(--text); }
+.class-chip.active {
+  background: linear-gradient(135deg, var(--gold), var(--goldd));
+  color: #000; border-color: var(--gold); font-weight: 700;
+  box-shadow: 0 3px 10px rgba(245,158,11,.3);
 }
 
-/* ── MOBILE SIDEBAR ──────────────────────────────────── */
-.mobile-nav{display:none} /* hidden — using sidebar on mobile too */
+/* ─── CLASS CARDS ────────────────────────────────── */
+.class-card {
+  background: linear-gradient(145deg, var(--s2), var(--s3));
+  border: 1px solid var(--border2); border-radius: var(--r);
+  padding: 16px 18px; display: flex; align-items: center;
+  gap: 14px; margin-bottom: 10px;
+  transition: all .2s; box-shadow: var(--shadowl);
+}
+.class-card:hover { transform: translateX(3px); border-color: var(--border2); box-shadow: var(--shadow); }
+.class-card-name { flex: 1; font-weight: 700; font-size: .95rem; }
+.class-card-meta { font-size: .75rem; color: var(--text2); }
+.class-card-count { font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; font-weight: 700; color: var(--accent); min-width: 36px; text-align: center; }
+.class-card-actions { display: flex; gap: 7px; }
+.status-chip { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: .69rem; font-weight: 700; }
+.status-active   { background: rgba(16,185,129,.15); color: #34d399; border: 1px solid rgba(16,185,129,.25); }
+.status-archived { background: rgba(100,116,139,.12); color: #94a3b8; border: 1px solid rgba(100,116,139,.2); }
 
-/* ── RESPONSIVE ──────────────────────────────────────── */
-@media(max-width:720px){
-  .sidebar{
-    position:fixed;top:0;left:0;bottom:0;
-    z-index:300;width:240px;
-    transform:translateX(-100%);
-    transition:transform 0.28s cubic-bezier(0.4,0,0.2,1);
-    box-shadow:8px 0 40px rgba(0,0,0,0.5);
+/* ─── AUDIT LOG ──────────────────────────────────── */
+.audit-preset {
+  padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border2);
+  background: transparent; color: var(--text2); font-family: inherit;
+  font-size: .76rem; cursor: pointer; transition: all .15s; font-weight: 600;
+}
+.audit-preset:hover { background: var(--s3); color: var(--text); }
+.audit-preset.active {
+  background: linear-gradient(135deg, var(--accent), var(--accentd));
+  color: #fff; border-color: var(--accent);
+  box-shadow: 0 3px 10px rgba(59,130,246,.3);
+}
+.audit-action-badge {
+  display: inline-block; padding: 3px 8px; border-radius: 5px;
+  font-size: .67rem; font-weight: 700;
+  font-family: 'JetBrains Mono', monospace; letter-spacing: .04em;
+}
+
+/* ─── BACKUP ─────────────────────────────────────── */
+.backup-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 13px 16px; border-bottom: 1px solid var(--border);
+  transition: background .15s;
+}
+.backup-row:last-child { border-bottom: none; }
+.backup-row:hover { background: rgba(255,255,255,.02); }
+.backup-name { flex: 1; font-family: 'JetBrains Mono', monospace; font-size: .79rem; color: var(--text); }
+.backup-meta { font-size: .75rem; color: var(--text2); white-space: nowrap; }
+.backup-actions { display: flex; gap: 7px; }
+.btn-restore {
+  padding: 6px 13px; border-radius: 9px; border: 1px solid var(--accent);
+  background: transparent; color: var(--accent); font-family: inherit;
+  font-size: .76rem; cursor: pointer; transition: all .15s; font-weight: 700;
+}
+.btn-restore:hover { background: var(--accent); color: #fff; box-shadow: 0 3px 10px rgba(59,130,246,.3); }
+.btn-del {
+  padding: 6px 10px; border-radius: 9px; border: 1px solid var(--border);
+  background: transparent; color: var(--text3); font-family: inherit;
+  font-size: .76rem; cursor: pointer; transition: all .15s;
+}
+.btn-del:hover { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,.08); }
+
+/* ─── TOAST ──────────────────────────────────────── */
+#toast {
+  position: fixed; bottom: 28px; left: 50%;
+  transform: translateX(-50%) translateY(90px);
+  background: var(--s3); border: 1px solid var(--border2);
+  border-radius: 13px; padding: 12px 24px; font-size: .84rem;
+  z-index: 999; transition: transform .35s cubic-bezier(.34,1.56,.64,1);
+  white-space: nowrap; box-shadow: 0 8px 32px rgba(0,0,0,.5);
+  font-weight: 600; pointer-events: none;
+}
+#toast.show { transform: translateX(-50%) translateY(0); }
+#toast.success { border-color: var(--green); color: #34d399; }
+#toast.error   { border-color: var(--danger); color: #fca5a5; }
+
+/* ─── PAYMENT ────────────────────────────────────── */
+.pay-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 16px; border-bottom: 1px solid var(--border); transition: background .15s;
+}
+.pay-row:last-child { border-bottom: none; }
+.pay-row:hover { background: rgba(255,255,255,.02); }
+.pay-name { flex: 1; font-size: .88rem; font-weight: 500; }
+.pay-amount { font-family: 'JetBrains Mono', monospace; font-size: .82rem; color: var(--text2); min-width: 38px; text-align: right; }
+.pay-toggle { display: flex; gap: 5px; }
+.pay-btn {
+  padding: 5px 12px; border-radius: 8px; border: 1px solid var(--border);
+  background: transparent; font-family: inherit; font-size: .74rem;
+  cursor: pointer; transition: all .15s; color: var(--text2); font-weight: 600;
+}
+.pay-btn.paid.active   { background: rgba(16,185,129,.2); color: #34d399; border-color: var(--green); }
+.pay-btn.unpaid.active { background: rgba(239,68,68,.15); color: #fca5a5; border-color: var(--danger); }
+.pay-btn.free.active   { background: rgba(59,130,246,.15); color: #60a5fa; border-color: var(--accent); }
+
+/* ─── EMPTY STATE ────────────────────────────────── */
+.empty-state { text-align: center; padding: 48px 24px; color: var(--text2); }
+.empty-icon  { font-size: 3rem; margin-bottom: 14px; opacity: .7; }
+.empty-text  { font-size: .88rem; color: var(--text2); font-weight: 400; line-height: 1.5; }
+
+/* ─── WARNING BANNER ─────────────────────────────── */
+.default-pw-banner {
+  margin: 14px 20px 0;
+  background: linear-gradient(135deg, rgba(245,158,11,.1), rgba(217,119,6,.06));
+  border: 1px solid rgba(245,158,11,.28);
+  border-radius: 12px; padding: 12px 18px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: .84rem; color: var(--gold2); font-weight: 500;
+}
+.default-pw-banner a {
+  color: var(--gold); font-weight: 700; cursor: pointer; text-decoration: underline; white-space: nowrap;
+}
+
+/* ─── FORMS ──────────────────────────────────────── */
+.form-section {
+  background: linear-gradient(145deg, var(--s2), var(--s3));
+  border: 1px solid var(--border2); border-radius: var(--r);
+  padding: 28px; max-width: 520px;
+  box-shadow: var(--shadowl);
+}
+
+/* ─── MOBILE ─────────────────────────────────────── */
+.mobile-nav { display: none; }
+
+@media (max-width: 720px) {
+  .sidebar {
+    position: fixed; top: 0; left: 0; bottom: 0;
+    z-index: 300; width: 248px;
+    transform: translateX(-100%);
+    transition: transform .28s cubic-bezier(.4,0,.2,1);
+    box-shadow: 10px 0 50px rgba(0,0,0,.7);
   }
-  .sidebar.open{transform:translateX(0)}
-  .topbar-hamburger{display:flex}
-  .stats-grid{grid-template-columns:repeat(2,1fr)}
-  .detail-grid{grid-template-columns:1fr}
-  th,td{padding:9px 10px}
-  .content{padding:14px 12px}
-  .topbar{padding:0 12px}
-  table{font-size:0.8rem}
-  .hide-mobile{display:none}
-  .exam-controls{grid-template-columns:1fr 1fr}
-  .login-box{padding:32px 24px}
-  .mobile-nav{display:none}
+  .sidebar.open { transform: translateX(0); }
+  .topbar-hamburger { display: flex; }
+  .stats-grid { grid-template-columns: repeat(2,1fr); }
+  .detail-grid { grid-template-columns: 1fr; }
+  th, td { padding: 10px 12px; }
+  .content { padding: 16px 14px; }
+  .topbar { padding: 0 14px; }
+  table { font-size: .8rem; }
+  .hide-mobile { display: none; }
+  .exam-controls { grid-template-columns: 1fr 1fr; }
+  .login-box { padding: 36px 24px; }
 }
 </style>
 </head>
 <body>
 
-<!-- ══ LOGIN ══════════════════════════════════════════ -->
+<!-- LOGIN -->
 <div id="loginScreen">
   <div class="login-box">
     <div class="login-logo">مدرسة أبوبكر الصديق</div>
@@ -496,10 +643,8 @@ tr:hover td{background:var(--surface2)}
   </div>
 </div>
 
-<!-- ══ APP ════════════════════════════════════════════ -->
+<!-- APP -->
 <div id="appShell">
-
-  <!-- Top Bar -->
   <div class="topbar">
     <button class="topbar-hamburger" id="sidebarToggle" onclick="toggleSidebar()">
       <span></span><span></span><span></span>
@@ -510,37 +655,33 @@ tr:hover td{background:var(--surface2)}
     <button class="btn-icon" onclick="logout()">Sign Out</button>
   </div>
 
-  <!-- Default password warning (injected by JS if needed) -->
   <div id="defaultPwWarning" style="display:none" class="default-pw-banner">
     <span>⚠️</span>
     <span>Default password detected. Please <a onclick="openModal('changePwModal')">change it now</a>.</span>
   </div>
 
   <div class="main-layout">
-
-    <!-- Sidebar overlay (mobile) -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
-    <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
       <div class="nav-section" id="navSectionMain">Main</div>
-      <button class="nav-item admin-only active" data-page="dashboard" onclick="nav('dashboard')"><span class="nav-icon">🏠</span>Dashboard</button>
-      <button class="nav-item admin-only" data-page="students" onclick="nav('students')"><span class="nav-icon">👥</span>Students</button>
-      <button class="nav-item" data-page="attendance" onclick="nav('attendance')"><span class="nav-icon">✅</span>Attendance</button>
-      <button class="nav-item" data-page="examEntry" onclick="nav('examEntry')"><span class="nav-icon">✏️</span>Exam Entry</button>
+      <button class="nav-item admin-only active" data-page="dashboard"         onclick="nav('dashboard')">        <span class="nav-icon">🏠</span>Dashboard</button>
+      <button class="nav-item admin-only"        data-page="students"          onclick="nav('students')">         <span class="nav-icon">👥</span>Students</button>
+      <button class="nav-item"                   data-page="attendance"        onclick="nav('attendance')">       <span class="nav-icon">✅</span>Attendance</button>
+      <button class="nav-item"                   data-page="examEntry"         onclick="nav('examEntry')">        <span class="nav-icon">✏️</span>Exam Entry</button>
       <div class="nav-section admin-only">Admin</div>
-      <button class="nav-item admin-only" data-page="examResults" onclick="nav('examResults')"><span class="nav-icon">📊</span>Exam Results</button>
-      <button class="nav-item admin-only" data-page="attendanceStatus" onclick="nav('attendanceStatus')"><span class="nav-icon">📅</span>Attend. Status</button>
-      <button class="nav-item admin-only" data-page="teachers" onclick="nav('teachers')"><span class="nav-icon">📚</span>Teachers</button>
-      <button class="nav-item admin-only" data-page="addStudent" onclick="nav('addStudent')"><span class="nav-icon">➕</span>Add Student</button>
-      <button class="nav-item admin-only" data-page="classes" onclick="nav('classes')"><span class="nav-icon">🏫</span>Classes</button>
-      <button class="nav-item admin-only" data-page="promotion" onclick="nav('promotion')"><span class="nav-icon">🎓</span>Promotion</button>
-      <button class="nav-item admin-only" data-page="backup" onclick="nav('backup')"><span class="nav-icon">💾</span>Backups</button>
+      <button class="nav-item admin-only"        data-page="examResults"       onclick="nav('examResults')">      <span class="nav-icon">📊</span>Exam Results</button>
+      <button class="nav-item admin-only"        data-page="attendanceStatus"  onclick="nav('attendanceStatus')"> <span class="nav-icon">📅</span>Attend. Status</button>
+      <button class="nav-item admin-only"        data-page="teachers"          onclick="nav('teachers')">         <span class="nav-icon">📚</span>Teachers</button>
+      <button class="nav-item admin-only"        data-page="addStudent"        onclick="nav('addStudent')">       <span class="nav-icon">➕</span>Add Student</button>
+      <button class="nav-item admin-only"        data-page="classes"           onclick="nav('classes')">          <span class="nav-icon">🏫</span>Classes</button>
+      <button class="nav-item admin-only"        data-page="promotion"         onclick="nav('promotion')">        <span class="nav-icon">🎓</span>Promotion</button>
+      <button class="nav-item admin-only"        data-page="backup"            onclick="nav('backup')">           <span class="nav-icon">💾</span>Backups</button>
       <div class="nav-section superior-only">Superior Admin</div>
-      <button class="nav-item superior-only" data-page="payment" onclick="nav('payment')"><span class="nav-icon">💰</span>Payments</button>
-      <button class="nav-item superior-only" data-page="paymentStatus" onclick="nav('paymentStatus')"><span class="nav-icon">📊</span>Pay Status</button>
-      <button class="nav-item superior-only" data-page="auditLogs" onclick="nav('auditLogs')"><span class="nav-icon">📋</span>Audit Logs</button>
-      <button class="nav-item superior-only" data-page="schoolAdmins" onclick="nav('schoolAdmins')"><span class="nav-icon">🛡️</span>School Admins</button>
+      <button class="nav-item superior-only"     data-page="payment"           onclick="nav('payment')">          <span class="nav-icon">💰</span>Payments</button>
+      <button class="nav-item superior-only"     data-page="paymentStatus"     onclick="nav('paymentStatus')">    <span class="nav-icon">📊</span>Pay Status</button>
+      <button class="nav-item superior-only"     data-page="auditLogs"         onclick="nav('auditLogs')">        <span class="nav-icon">📋</span>Audit Logs</button>
+      <button class="nav-item superior-only"     data-page="schoolAdmins"      onclick="nav('schoolAdmins')">     <span class="nav-icon">🛡️</span>School Admins</button>
     </div>
 
     <div class="content">
@@ -559,13 +700,9 @@ tr:hover td{background:var(--surface2)}
         <div class="class-chips" id="classChips"></div>
         <div class="filter-bar">
           <input class="search-inp" id="studentSearch" placeholder="🔍 Name or Student ID (ASS-0001)…" oninput="renderStudents()">
-          <select class="filter-sel" id="classFilter" onchange="renderStudents()">
-            <option value="">All Classes</option>
-          </select>
+          <select class="filter-sel" id="classFilter" onchange="renderStudents()"><option value="">All Classes</option></select>
           <select class="filter-sel" id="genderFilter" onchange="renderStudents()">
-            <option value="">All Genders</option>
-            <option value="Boy">Boys</option>
-            <option value="Girl">Girls</option>
+            <option value="">All Genders</option><option value="Boy">Boys</option><option value="Girl">Girls</option>
           </select>
         </div>
         <div class="table-wrap">
@@ -582,20 +719,18 @@ tr:hover td{background:var(--surface2)}
         <div class="page-title">Attendance</div>
         <div class="page-sub">Mark daily attendance by class</div>
         <div class="att-controls">
-          <select class="filter-sel" id="attClass" onchange="loadAttendanceClass()" style="flex:1;min-width:160px">
-            <option value="">Select Class...</option>
-          </select>
+          <select class="filter-sel" id="attClass" onchange="loadAttendanceClass()" style="flex:1;min-width:160px"><option value="">Select Class...</option></select>
           <input class="att-date-inp" id="attDate" type="date" onchange="loadAttendanceClass()">
           <button class="att-save-btn" id="attSaveBtn" onclick="saveAttendance()">💾 Save</button>
         </div>
-        <div id="attLockedBanner" style="display:none;background:rgba(16,185,129,0.1);border:1px solid #10b981;border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:0.85rem;color:#34d399;display:none;align-items:center;gap:10px">
+        <div id="attLockedBanner" style="display:none;background:rgba(16,185,129,.1);border:1px solid var(--green);border-radius:11px;padding:11px 16px;margin-bottom:14px;font-size:.85rem;color:#34d399;align-items:center;gap:10px">
           <span>🔒 Attendance locked for this day</span>
-          <button onclick="unlockAttendance()" class="admin-only" style="margin-left:auto;padding:4px 12px;border-radius:7px;border:1px solid #34d399;background:transparent;color:#34d399;font-family:inherit;font-size:0.78rem;cursor:pointer">Unlock</button>
+          <button onclick="unlockAttendance()" class="admin-only" style="margin-left:auto;padding:5px 13px;border-radius:8px;border:1px solid #34d399;background:transparent;color:#34d399;font-family:inherit;font-size:.78rem;cursor:pointer;font-weight:700">Unlock</button>
         </div>
         <div class="att-summary" id="attSummary"></div>
         <div id="attList"><div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">Select a class to mark attendance</div></div></div>
-        <div id="attDoneWrap" style="display:none;margin-top:14px">
-          <button onclick="doneAttendance()" style="width:100%;padding:14px;background:linear-gradient(135deg,var(--accent2),#059669);border:none;border-radius:11px;color:#fff;font-family:inherit;font-size:1rem;font-weight:800;cursor:pointer;letter-spacing:0.04em">✅ Done — Lock Attendance</button>
+        <div id="attDoneWrap" style="display:none;margin-top:16px">
+          <button onclick="doneAttendance()" style="width:100%;padding:15px;background:linear-gradient(135deg,var(--green),var(--greend));border:none;border-radius:12px;color:#fff;font-family:inherit;font-size:1rem;font-weight:800;cursor:pointer;letter-spacing:.04em;box-shadow:0 6px 20px rgba(16,185,129,.3)">✅ Done — Lock Attendance</button>
         </div>
       </div>
 
@@ -603,22 +738,22 @@ tr:hover td{background:var(--surface2)}
       <div class="page" id="page-attendanceStatus">
         <div class="page-title">Attendance Status</div>
         <div class="page-sub">Overview, monthly summary and student history</div>
-        <div style="display:flex;gap:6px;margin-bottom:20px;background:var(--bg);border-radius:12px;padding:4px;border:1px solid var(--border)">
-          <button class="ps-tab active" id="astab-overview" onclick="switchAttTab('overview')" style="flex:1;padding:9px;border:none;border-radius:9px;background:linear-gradient(135deg,var(--accent),#2563eb);color:#fff;font-family:inherit;font-size:0.81rem;cursor:pointer;font-weight:700">📊 Overview</button>
-          <button class="ps-tab" id="astab-monthly" onclick="switchAttTab('monthly')" style="flex:1;padding:9px;border:none;border-radius:9px;background:transparent;color:var(--text2);font-family:inherit;font-size:0.81rem;cursor:pointer">📅 Monthly</button>
-          <button class="ps-tab" id="astab-student" onclick="switchAttTab('student')" style="flex:1;padding:9px;border:none;border-radius:9px;background:transparent;color:var(--text2);font-family:inherit;font-size:0.81rem;cursor:pointer">👤 Student</button>
+        <div class="tab-bar">
+          <button class="active" id="astab-overview" onclick="switchAttTab('overview')">📊 Overview</button>
+          <button id="astab-monthly" onclick="switchAttTab('monthly')">📅 Monthly</button>
+          <button id="astab-student" onclick="switchAttTab('student')">👤 Student</button>
         </div>
         <div id="as-overview">
-          <div style="display:flex;gap:8px;margin-bottom:14px;align-items:center;flex-wrap:wrap">
+          <div style="display:flex;gap:8px;margin-bottom:16px;align-items:center;flex-wrap:wrap">
             <input class="att-date-inp" id="asOverviewDate" type="date">
-            <button class="att-save-btn" onclick="renderAttOverview()" style="padding:9px 16px">Load</button>
-            <span id="asOverviewInfo" style="font-size:0.78rem;color:var(--text2)"></span>
+            <button class="att-save-btn" onclick="renderAttOverview()" style="padding:10px 18px">Load</button>
+            <span id="asOverviewInfo" style="font-size:.78rem;color:var(--text2)"></span>
           </div>
-          <div id="asOverviewGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px"></div>
+          <div id="asOverviewGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px"></div>
           <div id="asOverviewTotal" style="margin-top:14px"></div>
         </div>
         <div id="as-monthly" style="display:none">
-          <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;align-items:center">
+          <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
             <select class="filter-sel" id="asMonthSel" style="flex:1">
               <option value="2026-01">January 2026</option><option value="2026-02">February 2026</option>
               <option value="2026-03">March 2026</option><option value="2026-04">April 2026</option>
@@ -627,21 +762,19 @@ tr:hover td{background:var(--surface2)}
               <option value="2026-09">September 2026</option><option value="2026-10">October 2026</option>
               <option value="2026-11">November 2026</option><option value="2026-12">December 2026</option>
             </select>
-            <button class="att-save-btn" onclick="renderAttMonthly()" style="padding:9px 16px">Load</button>
+            <button class="att-save-btn" onclick="renderAttMonthly()" style="padding:10px 18px">Load</button>
           </div>
-          <div class="table-wrap" id="asMonthlyTable">
-            <div class="empty-state"><div class="empty-icon">📅</div><div class="empty-text">Select a month and click Load</div></div>
-          </div>
+          <div class="table-wrap" id="asMonthlyTable"><div class="empty-state"><div class="empty-icon">📅</div><div class="empty-text">Select a month and click Load</div></div></div>
         </div>
         <div id="as-student" style="display:none">
-          <div class="filter-bar" style="margin-bottom:14px">
+          <div class="filter-bar" style="margin-bottom:16px">
             <input class="search-inp" id="asStudentSearch" placeholder="🔍 Name or Student ID…" oninput="renderAttStudentSearch()">
             <select class="filter-sel" id="asStudentClass" onchange="renderAttStudentSearch()"><option value="">All Classes</option></select>
           </div>
           <div id="asStudentList"></div>
           <div id="asStudentHistory" style="display:none;margin-top:16px">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-              <button onclick="closeAttHistory()" style="background:transparent;border:none;color:var(--text2);cursor:pointer;font-size:1.1rem">←</button>
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+              <button onclick="closeAttHistory()" style="background:transparent;border:none;color:var(--text2);cursor:pointer;font-size:1.1rem;padding:4px">←</button>
               <div style="font-size:1rem;font-weight:700" id="asHistoryName"></div>
             </div>
             <div id="asHistoryContent"></div>
@@ -654,25 +787,10 @@ tr:hover td{background:var(--surface2)}
         <div class="page-title">Exam Entry</div>
         <div class="page-sub">Enter student marks by class and subject</div>
         <div class="exam-controls">
-          <div>
-            <div class="form-label">Class</div>
-            <select class="form-inp" id="examClass" onchange="loadExamForm()"><option value="">Select Class...</option></select>
-          </div>
-          <div>
-            <div class="form-label">Subject</div>
-            <select class="form-inp" id="examSubject" onchange="loadExamForm()"><option value="">Select Subject...</option></select>
-          </div>
-          <div>
-            <div class="form-label">Exam Type</div>
-            <select class="form-inp" id="examType">
-              <option value="Monthly">Monthly</option>
-              <option value="Midterm">Midterm</option>
-              <option value="Final">Final</option>
-            </select>
-          </div>
-          <div style="padding-bottom:1px">
-            <button class="att-save-btn" onclick="saveExamMarks()" style="height:42px">💾 Save</button>
-          </div>
+          <div><div class="form-label">Class</div><select class="form-inp" id="examClass" onchange="loadExamForm()"><option value="">Select Class...</option></select></div>
+          <div><div class="form-label">Subject</div><select class="form-inp" id="examSubject" onchange="loadExamForm()"><option value="">Select Subject...</option></select></div>
+          <div><div class="form-label">Exam Type</div><select class="form-inp" id="examType"><option value="Monthly">Monthly</option><option value="Midterm">Midterm</option><option value="Final">Final</option></select></div>
+          <div style="padding-bottom:1px"><button class="att-save-btn" onclick="saveExamMarks()" style="height:44px">💾 Save</button></div>
         </div>
         <div id="examFormList"><div class="empty-state"><div class="empty-icon">✏️</div><div class="empty-text">Select class and subject to enter marks</div></div></div>
       </div>
@@ -681,52 +799,39 @@ tr:hover td{background:var(--surface2)}
       <div class="page" id="page-examResults">
         <div class="page-title">Exam Management</div>
         <div class="page-sub">View, manage, rank and export class results</div>
-        <div class="results-controls" id="resultsClassTabs" style="margin-bottom:12px"></div>
-        <div style="display:flex;gap:6px;margin-bottom:16px;background:var(--bg);border-radius:12px;padding:4px;border:1px solid var(--border)">
-          <button id="ermtab-marks" onclick="switchExamTab('marks')" style="flex:1;padding:8px;border:none;border-radius:9px;background:linear-gradient(135deg,var(--accent),#2563eb);color:#fff;font-family:inherit;font-size:0.8rem;cursor:pointer;font-weight:700">📝 Marks</button>
-          <button id="ermtab-ranking" onclick="switchExamTab('ranking')" style="flex:1;padding:8px;border:none;border-radius:9px;background:transparent;color:var(--text2);font-family:inherit;font-size:0.8rem;cursor:pointer">🏆 Ranking</button>
-          <button id="ermtab-export" onclick="switchExamTab('export')" style="flex:1;padding:8px;border:none;border-radius:9px;background:transparent;color:var(--text2);font-family:inherit;font-size:0.8rem;cursor:pointer">📤 Export</button>
+        <div class="results-controls" id="resultsClassTabs" style="margin-bottom:14px"></div>
+        <div class="tab-bar">
+          <button class="active" id="ermtab-marks"   onclick="switchExamTab('marks')">📝 Marks</button>
+          <button id="ermtab-ranking" onclick="switchExamTab('ranking')">🏆 Ranking</button>
+          <button id="ermtab-export"  onclick="switchExamTab('export')">📤 Export</button>
         </div>
         <div id="erm-marks">
-          <div class="filter-bar" style="margin-bottom:12px">
-            <select class="filter-sel" id="resultsAcademicYear" onchange="renderResultsTable()">
-              <option value="2025-2026">2025-2026</option><option value="2026-2027">2026-2027</option>
-            </select>
+          <div class="filter-bar" style="margin-bottom:14px">
+            <select class="filter-sel" id="resultsAcademicYear" onchange="renderResultsTable()"><option value="2025-2026">2025-2026</option><option value="2026-2027">2026-2027</option></select>
             <select class="filter-sel" id="resultsExamType" onchange="renderResultsTable()">
               <option value="Final" selected>Final</option><option value="Midterm">Midterm</option>
               <option value="Monthly 1">Monthly 1</option><option value="Monthly 2">Monthly 2</option>
               <option value="Monthly 3">Monthly 3</option><option value="Monthly 4">Monthly 4</option>
               <option value="">All Types</option>
             </select>
-            <span id="ermMarksInfo" style="font-size:0.78rem;color:var(--text2)"></span>
+            <span id="ermMarksInfo" style="font-size:.78rem;color:var(--text2)"></span>
           </div>
-          <div class="table-wrap" id="resultsTableWrap">
-            <div class="empty-state"><div class="empty-icon">📊</div><div class="empty-text">Select a class above</div></div>
-          </div>
+          <div class="table-wrap" id="resultsTableWrap"><div class="empty-state"><div class="empty-icon">📊</div><div class="empty-text">Select a class above</div></div></div>
         </div>
         <div id="erm-ranking" style="display:none">
-          <div class="filter-bar" style="margin-bottom:12px">
-            <select class="filter-sel" id="rankingExamType" onchange="renderRanking()">
-              <option value="Final" selected>Final</option><option value="Midterm">Midterm</option><option value="Monthly">Monthly</option>
-            </select>
+          <div class="filter-bar" style="margin-bottom:14px">
+            <select class="filter-sel" id="rankingExamType" onchange="renderRanking()"><option value="Final" selected>Final</option><option value="Midterm">Midterm</option><option value="Monthly">Monthly</option></select>
           </div>
-          <div id="rankingTableWrap">
-            <div class="empty-state"><div class="empty-icon">🏆</div><div class="empty-text">Select a class above</div></div>
-          </div>
+          <div id="rankingTableWrap"><div class="empty-state"><div class="empty-icon">🏆</div><div class="empty-text">Select a class above</div></div></div>
         </div>
         <div id="erm-export" style="display:none">
-          <div style="background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius);padding:22px;max-width:400px">
-            <div style="font-size:0.9rem;font-weight:700;margin-bottom:16px">Export Class Results</div>
-            <div class="form-row">
-              <label class="form-label">Exam Type</label>
-              <select class="form-inp" id="exportExamType">
-                <option value="Final">Final</option><option value="Midterm">Midterm</option><option value="Monthly">Monthly</option>
-              </select>
-            </div>
-            <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
-              <button onclick="exportExamResults('csv')" style="flex:1;padding:10px;border-radius:10px;border:1px solid var(--accent2);background:transparent;color:var(--accent2);font-family:inherit;font-size:0.87rem;cursor:pointer;font-weight:600">⬇ CSV</button>
-              <button onclick="exportExamResults('print')" style="flex:1;padding:10px;border-radius:10px;border:1px solid var(--warn);background:transparent;color:var(--warn);font-family:inherit;font-size:0.87rem;cursor:pointer;font-weight:600">🖨 Print/PDF</button>
-              <button onclick="exportExamResults('xlsx')" style="flex:1;padding:10px;border-radius:10px;border:1px solid var(--accent);background:transparent;color:var(--accent);font-family:inherit;font-size:0.87rem;cursor:pointer;font-weight:600">📊 Excel</button>
+          <div class="form-section">
+            <div style="font-size:.95rem;font-weight:700;margin-bottom:18px">Export Class Results</div>
+            <div class="form-row"><label class="form-label">Exam Type</label><select class="form-inp" id="exportExamType"><option value="Final">Final</option><option value="Midterm">Midterm</option><option value="Monthly">Monthly</option></select></div>
+            <div style="display:flex;gap:8px;margin-top:18px;flex-wrap:wrap">
+              <button onclick="exportExamResults('csv')"   style="flex:1;padding:11px;border-radius:10px;border:1px solid var(--green);background:transparent;color:var(--green);font-family:inherit;font-size:.87rem;cursor:pointer;font-weight:700">⬇ CSV</button>
+              <button onclick="exportExamResults('print')" style="flex:1;padding:11px;border-radius:10px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-family:inherit;font-size:.87rem;cursor:pointer;font-weight:700">🖨 Print/PDF</button>
+              <button onclick="exportExamResults('xlsx')"  style="flex:1;padding:11px;border-radius:10px;border:1px solid var(--accent);background:transparent;color:var(--accent);font-family:inherit;font-size:.87rem;cursor:pointer;font-weight:700">📊 Excel</button>
             </div>
           </div>
         </div>
@@ -736,32 +841,22 @@ tr:hover td{background:var(--surface2)}
       <div class="page" id="page-teachers">
         <div class="page-title">Teachers</div>
         <div class="page-sub">Manage teacher accounts</div>
-        <button class="btn-sm" style="margin-bottom:16px;padding:9px 18px;background:linear-gradient(135deg,var(--accent),#2563eb);color:#fff;border-color:var(--accent);font-weight:700" onclick="openAddTeacher()">+ Add Teacher</button>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>#</th><th>Name</th><th>Username</th><th class="hide-mobile">Assigned Class</th><th>Actions</th></tr></thead>
-            <tbody id="teachersBody"></tbody>
-          </table>
-        </div>
+        <button class="btn-sm" style="margin-bottom:18px;padding:10px 20px;background:linear-gradient(135deg,var(--accent),var(--accentd));color:#fff;border-color:var(--accent);font-weight:700;border-radius:11px;box-shadow:0 4px 14px rgba(59,130,246,.3)" onclick="openAddTeacher()">+ Add Teacher</button>
+        <div class="table-wrap"><table><thead><tr><th>#</th><th>Name</th><th>Username</th><th class="hide-mobile">Assigned Class</th><th>Actions</th></tr></thead><tbody id="teachersBody"></tbody></table></div>
       </div>
 
       <!-- PAYMENT -->
       <div class="page" id="page-payment">
         <div class="page-title">Payments</div>
         <div class="page-sub">Monthly fee collection by class</div>
-        <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
+        <div style="display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;align-items:center">
           <select class="filter-sel" id="payClass" onchange="loadPaymentClass()" style="flex:1;min-width:160px"><option value="">Select Class...</option></select>
           <select class="filter-sel" id="payMonth">
-            <option value="Jan 2026">Jan 2026</option><option value="Feb 2026">Feb 2026</option>
-            <option value="Mar 2026">Mar 2026</option><option value="Apr 2026">Apr 2026</option>
-            <option value="May 2026">May 2026</option><option value="Jun 2026">Jun 2026</option>
-            <option value="Jul 2026">Jul 2026</option><option value="Aug 2026">Aug 2026</option>
-            <option value="Sep 2026">Sep 2026</option><option value="Oct 2026">Oct 2026</option>
-            <option value="Nov 2026">Nov 2026</option><option value="Dec 2026">Dec 2026</option>
+            <option value="Jan 2026">Jan 2026</option><option value="Feb 2026">Feb 2026</option><option value="Mar 2026">Mar 2026</option><option value="Apr 2026">Apr 2026</option><option value="May 2026">May 2026</option><option value="Jun 2026">Jun 2026</option><option value="Jul 2026">Jul 2026</option><option value="Aug 2026">Aug 2026</option><option value="Sep 2026">Sep 2026</option><option value="Oct 2026">Oct 2026</option><option value="Nov 2026">Nov 2026</option><option value="Dec 2026">Dec 2026</option>
           </select>
           <button class="att-save-btn" onclick="savePayments()">💾 Save</button>
         </div>
-        <div id="paySummary" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px"></div>
+        <div id="paySummary" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px"></div>
         <div id="payList"><div class="empty-state"><div class="empty-icon">💰</div><div class="empty-text">Select a class to manage payments</div></div></div>
       </div>
 
@@ -769,34 +864,32 @@ tr:hover td{background:var(--surface2)}
       <div class="page" id="page-paymentStatus">
         <div class="page-title">Payment Status</div>
         <div class="page-sub">Overview, monthly summary & student history</div>
-        <div style="display:flex;gap:6px;margin-bottom:20px;background:var(--bg);border-radius:12px;padding:4px;border:1px solid var(--border)">
-          <button class="ps-tab active" onclick="switchPsTab('overview')" id="pstab-overview" style="flex:1;padding:9px;border:none;border-radius:9px;background:linear-gradient(135deg,var(--accent),#2563eb);color:#fff;font-family:inherit;font-size:0.81rem;cursor:pointer;font-weight:700">📊 Overview</button>
-          <button class="ps-tab" onclick="switchPsTab('monthly')" id="pstab-monthly" style="flex:1;padding:9px;border:none;border-radius:9px;background:transparent;color:var(--text2);font-family:inherit;font-size:0.81rem;cursor:pointer">📅 Monthly</button>
-          <button class="ps-tab" onclick="switchPsTab('student')" id="pstab-student" style="flex:1;padding:9px;border:none;border-radius:9px;background:transparent;color:var(--text2);font-family:inherit;font-size:0.81rem;cursor:pointer">👤 Student</button>
+        <div class="tab-bar">
+          <button class="active" id="pstab-overview" onclick="switchPsTab('overview')">📊 Overview</button>
+          <button id="pstab-monthly" onclick="switchPsTab('monthly')">📅 Monthly</button>
+          <button id="pstab-student" onclick="switchPsTab('student')">👤 Student</button>
         </div>
         <div id="ps-overview">
-          <div style="display:flex;gap:8px;margin-bottom:14px;align-items:center">
+          <div style="display:flex;gap:8px;margin-bottom:16px;align-items:center">
             <select class="filter-sel" id="overviewMonth" onchange="renderOverview()" style="flex:1"></select>
-            <button class="att-save-btn" onclick="renderOverview()" style="padding:9px 14px">Refresh</button>
+            <button class="att-save-btn" onclick="renderOverview()" style="padding:10px 16px">Refresh</button>
           </div>
-          <div id="overviewGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px"></div>
-          <div id="overviewTotal" style="margin-top:14px"></div>
+          <div id="overviewGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px"></div>
+          <div id="overviewTotal" style="margin-top:16px"></div>
         </div>
         <div id="ps-monthly" style="display:none">
-          <div style="display:flex;gap:8px;margin-bottom:14px">
-            <select class="filter-sel" id="monthlyMonth" onchange="renderMonthly()" style="flex:1"></select>
-          </div>
+          <div style="display:flex;gap:8px;margin-bottom:16px"><select class="filter-sel" id="monthlyMonth" onchange="renderMonthly()" style="flex:1"></select></div>
           <div class="table-wrap" id="monthlyTable"></div>
         </div>
         <div id="ps-student" style="display:none">
-          <div class="filter-bar" style="margin-bottom:14px">
+          <div class="filter-bar" style="margin-bottom:16px">
             <input class="search-inp" id="psStudentSearch" placeholder="🔍 Search student..." oninput="renderStudentSearch()">
             <select class="filter-sel" id="psStudentClass" onchange="renderStudentSearch()"><option value="">All Classes</option></select>
           </div>
           <div id="psStudentList"></div>
           <div id="psStudentHistory" style="display:none;margin-top:16px">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-              <button onclick="closePsHistory()" style="background:transparent;border:none;color:var(--text2);cursor:pointer;font-size:1.1rem">←</button>
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+              <button onclick="closePsHistory()" style="background:transparent;border:none;color:var(--text2);cursor:pointer;font-size:1.1rem;padding:4px">←</button>
               <div style="font-size:1rem;font-weight:700" id="psHistoryName"></div>
             </div>
             <div id="psHistoryGrid"></div>
@@ -808,86 +901,66 @@ tr:hover td{background:var(--surface2)}
       <div class="page" id="page-schoolAdmins">
         <div class="page-title">School Admins</div>
         <div class="page-sub">Manage school admin accounts</div>
-        <button class="btn-sm" style="margin-bottom:16px;padding:9px 18px;background:linear-gradient(135deg,var(--accent),#2563eb);color:#fff;border-color:var(--accent);font-weight:700" onclick="openAddAdmin()">+ Add School Admin</button>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>#</th><th>Name</th><th>Username</th><th>Actions</th></tr></thead>
-            <tbody id="adminsBody"></tbody>
-          </table>
-        </div>
+        <button class="btn-sm" style="margin-bottom:18px;padding:10px 20px;background:linear-gradient(135deg,var(--accent),var(--accentd));color:#fff;border-color:var(--accent);font-weight:700;border-radius:11px;box-shadow:0 4px 14px rgba(59,130,246,.3)" onclick="openAddAdmin()">+ Add School Admin</button>
+        <div class="table-wrap"><table><thead><tr><th>#</th><th>Name</th><th>Username</th><th>Actions</th></tr></thead><tbody id="adminsBody"></tbody></table></div>
       </div>
 
       <!-- AUDIT LOGS -->
       <div class="page" id="page-auditLogs">
         <div class="page-title">Audit Logs</div>
         <div class="page-sub">Track all system activity and user actions</div>
-        <div style="background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius);padding:16px;margin-bottom:14px">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+        <div style="background:var(--s2);border:1px solid var(--border2);border-radius:var(--r);padding:18px;margin-bottom:16px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
             <input class="search-inp" id="auditUsername" placeholder="Username…" oninput="auditFilterChanged()">
             <input class="search-inp" id="auditTargetId" placeholder="Student ID or target…" oninput="auditFilterChanged()">
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px">
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">
             <select class="filter-sel" id="auditAction" onchange="auditFilterChanged()" style="width:100%"><option value="">All Actions</option></select>
-            <input class="att-date-inp" id="auditDateFrom" type="date" onchange="auditFilterChanged()" placeholder="From">
-            <input class="att-date-inp" id="auditDateTo" type="date" onchange="auditFilterChanged()" placeholder="To">
+            <input class="att-date-inp" id="auditDateFrom" type="date" onchange="auditFilterChanged()">
+            <input class="att-date-inp" id="auditDateTo"   type="date" onchange="auditFilterChanged()">
           </div>
-          <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
-            <button class="audit-preset active" id="preset-all" onclick="setAuditPreset('')">All Time</button>
-            <button class="audit-preset" id="preset-today" onclick="setAuditPreset('today')">Today</button>
-            <button class="audit-preset" id="preset-7days" onclick="setAuditPreset('7days')">Last 7 Days</button>
-            <button class="audit-preset" id="preset-30days" onclick="setAuditPreset('30days')">Last 30 Days</button>
+          <div style="display:flex;gap:7px;flex-wrap:wrap;align-items:center">
+            <button class="audit-preset active" id="preset-all"    onclick="setAuditPreset('')">All Time</button>
+            <button class="audit-preset"        id="preset-today"  onclick="setAuditPreset('today')">Today</button>
+            <button class="audit-preset"        id="preset-7days"  onclick="setAuditPreset('7days')">Last 7 Days</button>
+            <button class="audit-preset"        id="preset-30days" onclick="setAuditPreset('30days')">Last 30 Days</button>
             <button onclick="clearAuditFilters()" class="btn-sm" style="margin-left:auto">Clear</button>
-            <button onclick="exportAuditLogs('csv')" class="btn-sm" style="border-color:var(--accent2);color:var(--accent2)">⬇ CSV</button>
-            <button onclick="exportAuditLogs('pdf')" class="btn-sm" style="border-color:var(--warn);color:var(--warn)">⬇ PDF</button>
+            <button onclick="exportAuditLogs('csv')" class="btn-sm" style="border-color:var(--green);color:var(--green)">⬇ CSV</button>
+            <button onclick="exportAuditLogs('pdf')" class="btn-sm" style="border-color:var(--gold);color:var(--gold)">⬇ PDF</button>
           </div>
         </div>
-        <div id="auditSummaryBar" style="font-size:0.8rem;color:var(--text2);margin-bottom:10px"></div>
-        <div class="table-wrap" id="auditTable">
-          <div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">Loading logs…</div></div>
-        </div>
-        <div class="pagination" id="auditPagination" style="margin-top:12px"></div>
+        <div id="auditSummaryBar" style="font-size:.8rem;color:var(--text2);margin-bottom:12px"></div>
+        <div class="table-wrap" id="auditTable"><div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">Loading logs…</div></div></div>
+        <div class="pagination" id="auditPagination" style="margin-top:14px"></div>
       </div>
 
       <!-- BACKUP -->
       <div class="page" id="page-backup">
         <div class="page-title">Database Backups</div>
         <div class="page-sub">Daily automatic backups · 30 backup limit</div>
-        <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;align-items:center">
-          <button id="createBackupBtn" onclick="createBackup()"
-            style="padding:11px 22px;background:linear-gradient(135deg,var(--accent),#2563eb);border:none;border-radius:10px;color:#fff;font-family:inherit;font-size:0.87rem;font-weight:700;cursor:pointer">
-            ＋ Create Backup Now
-          </button>
-          <span id="backupStatus" style="font-size:0.82rem;color:var(--text2)"></span>
+        <div style="display:flex;gap:12px;margin-bottom:22px;flex-wrap:wrap;align-items:center">
+          <button id="createBackupBtn" onclick="createBackup()" style="padding:12px 24px;background:linear-gradient(135deg,var(--accent),var(--accentd));border:none;border-radius:11px;color:#fff;font-family:inherit;font-size:.9rem;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(59,130,246,.3)">＋ Create Backup Now</button>
+          <span id="backupStatus" style="font-size:.82rem;color:var(--text2)"></span>
         </div>
-        <div class="table-wrap" id="backupList">
-          <div class="empty-state"><div class="empty-icon">💾</div><div class="empty-text">Loading backups…</div></div>
-        </div>
+        <div class="table-wrap" id="backupList"><div class="empty-state"><div class="empty-icon">💾</div><div class="empty-text">Loading backups…</div></div></div>
       </div>
 
       <!-- PROMOTION -->
       <div class="page" id="page-promotion">
         <div class="page-title">Student Promotion</div>
         <div class="page-sub">Promote or hold back students at end of academic year</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;max-width:500px">
-          <div>
-            <div class="form-label">Class</div>
-            <select class="form-inp" id="promClass" onchange="loadPromotionClass()"><option value="">Select Class…</option></select>
-          </div>
-          <div>
-            <div class="form-label">Academic Year</div>
-            <select class="form-inp" id="promYear">
-              <option value="2025-2026">2025-2026</option><option value="2026-2027">2026-2027</option>
-            </select>
-          </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;max-width:520px">
+          <div><div class="form-label">Class</div><select class="form-inp" id="promClass" onchange="loadPromotionClass()"><option value="">Select Class…</option></select></div>
+          <div><div class="form-label">Academic Year</div><select class="form-inp" id="promYear"><option value="2025-2026">2025-2026</option><option value="2026-2027">2026-2027</option></select></div>
         </div>
-        <div id="promNextClass" style="font-size:0.82rem;color:var(--text2);margin-bottom:12px"></div>
-        <div id="promActions" style="display:none;margin-bottom:14px">
+        <div id="promNextClass" style="font-size:.82rem;color:var(--text2);margin-bottom:14px"></div>
+        <div id="promActions" style="display:none;margin-bottom:16px">
           <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <button onclick="promoteAll()" style="padding:9px 18px;background:linear-gradient(135deg,var(--accent2),#059669);border:none;border-radius:10px;color:#fff;font-family:inherit;font-size:0.84rem;font-weight:700;cursor:pointer">✓ Promote All</button>
-            <button onclick="promoteSelected()" style="padding:9px 18px;background:linear-gradient(135deg,var(--accent),#2563eb);border:none;border-radius:10px;color:#fff;font-family:inherit;font-size:0.84rem;font-weight:700;cursor:pointer">✓ Promote Selected</button>
-            <button onclick="repeatSelected()" style="padding:9px 18px;background:linear-gradient(135deg,var(--danger),#dc2626);border:none;border-radius:10px;color:#fff;font-family:inherit;font-size:0.84rem;font-weight:700;cursor:pointer">✗ Repeat Selected</button>
+            <button onclick="promoteAll()"      style="padding:10px 20px;background:linear-gradient(135deg,var(--green),var(--greend));border:none;border-radius:11px;color:#fff;font-family:inherit;font-size:.85rem;font-weight:800;cursor:pointer;box-shadow:0 4px 14px rgba(16,185,129,.3)">✓ Promote All</button>
+            <button onclick="promoteSelected()" style="padding:10px 20px;background:linear-gradient(135deg,var(--accent),var(--accentd));border:none;border-radius:11px;color:#fff;font-family:inherit;font-size:.85rem;font-weight:800;cursor:pointer;box-shadow:0 4px 14px rgba(59,130,246,.3)">✓ Promote Selected</button>
+            <button onclick="repeatSelected()"  style="padding:10px 20px;background:linear-gradient(135deg,var(--danger),#dc2626);border:none;border-radius:11px;color:#fff;font-family:inherit;font-size:.85rem;font-weight:800;cursor:pointer;box-shadow:0 4px 14px rgba(239,68,68,.3)">✗ Repeat Selected</button>
           </div>
-          <div style="font-size:0.78rem;color:var(--text2);margin-top:8px">Select students below then use Promote/Repeat Selected, or use Promote All for entire class</div>
+          <div style="font-size:.78rem;color:var(--text2);margin-top:8px">Select students below then use Promote/Repeat Selected, or use Promote All for entire class</div>
         </div>
         <div id="promList"><div class="empty-state"><div class="empty-icon">🎓</div><div class="empty-text">Select a class to begin</div></div></div>
       </div>
@@ -896,12 +969,10 @@ tr:hover td{background:var(--surface2)}
       <div class="page" id="page-classes">
         <div class="page-title">Class Management</div>
         <div class="page-sub">Create, edit and manage classes dynamically</div>
-        <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
-          <button onclick="openCreateClass()" style="padding:9px 18px;background:linear-gradient(135deg,var(--accent),#2563eb);border:none;border-radius:10px;color:#fff;font-family:inherit;font-size:0.84rem;font-weight:700;cursor:pointer">+ Create Class</button>
+        <div style="display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;align-items:center">
+          <button onclick="openCreateClass()" style="padding:10px 20px;background:linear-gradient(135deg,var(--accent),var(--accentd));border:none;border-radius:11px;color:#fff;font-family:inherit;font-size:.85rem;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(59,130,246,.3)">+ Create Class</button>
           <input class="search-inp" id="classSearch" placeholder="🔍 Search classes…" oninput="renderClassList()" style="flex:1;min-width:140px">
-          <select class="filter-sel" id="classStatusFilter" onchange="renderClassList()">
-            <option value="">Active Classes</option><option value="archived">Archived</option><option value="all">All</option>
-          </select>
+          <select class="filter-sel" id="classStatusFilter" onchange="renderClassList()"><option value="">Active Classes</option><option value="archived">Archived</option><option value="all">All</option></select>
         </div>
         <div id="classListWrap"><div class="empty-state"><div class="empty-icon">🏫</div><div class="empty-text">Loading classes…</div></div></div>
       </div>
@@ -910,7 +981,7 @@ tr:hover td{background:var(--surface2)}
       <div class="page" id="page-addStudent">
         <div class="page-title">Add Student</div>
         <div class="page-sub">Register a new student</div>
-        <div style="background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius);padding:26px;max-width:500px">
+        <div class="form-section">
           <div class="form-row"><label class="form-label">Full Name</label><input class="form-inp" id="ns_name"></div>
           <div class="form-row"><label class="form-label">Class</label><select class="form-inp" id="ns_class"></select></div>
           <div class="form-row"><label class="form-label">Gender</label><select class="form-inp" id="ns_gender"><option value="Boy">Boy</option><option value="Girl">Girl</option></select></div>
@@ -919,37 +990,35 @@ tr:hover td{background:var(--surface2)}
           <div class="form-row"><label class="form-label">Guardian Phone</label><input class="form-inp" id="ns_phone" type="tel"></div>
           <div class="form-row"><label class="form-label">Mother Name</label><input class="form-inp" id="ns_mother"></div>
           <div class="form-row"><label class="form-label">Mother Phone</label><input class="form-inp" id="ns_mphone" type="tel"></div>
-          <button class="btn-save" style="width:100%;margin-top:10px" onclick="addNewStudent()">Add Student</button>
+          <button class="btn-save" style="width:100%;margin-top:12px" onclick="addNewStudent()">Add Student</button>
         </div>
       </div>
 
     </div><!-- /content -->
   </div><!-- /main-layout -->
-
-  <!-- Mobile nav hidden (sidebar used instead) -->
   <div class="mobile-nav" style="display:none">
     <div class="mobile-nav-items">
-      <button class="mobile-nav-item admin-only active" data-page="dashboard" onclick="nav('dashboard')"><span class="mobile-nav-icon">🏠</span>Home</button>
-      <button class="mobile-nav-item admin-only" data-page="students" onclick="nav('students')"><span class="mobile-nav-icon">👥</span>Students</button>
-      <button class="mobile-nav-item" data-page="attendance" onclick="nav('attendance')"><span class="mobile-nav-icon">✅</span>Attend.</button>
-      <button class="mobile-nav-item admin-only" data-page="attendanceStatus" onclick="nav('attendanceStatus')"><span class="mobile-nav-icon">📅</span>Status</button>
-      <button class="mobile-nav-item" data-page="examEntry" onclick="nav('examEntry')"><span class="mobile-nav-icon">✏️</span>Exam</button>
-      <button class="mobile-nav-item admin-only" data-page="examResults" onclick="nav('examResults')"><span class="mobile-nav-icon">📊</span>Results</button>
-      <button class="mobile-nav-item admin-only" data-page="backup" onclick="nav('backup')"><span class="mobile-nav-icon">💾</span>Backups</button>
-      <button class="mobile-nav-item superior-only" data-page="payment" onclick="nav('payment')"><span class="mobile-nav-icon">💰</span>Pay</button>
-      <button class="mobile-nav-item superior-only" data-page="paymentStatus" onclick="nav('paymentStatus')"><span class="mobile-nav-icon">📊</span>Status</button>
-      <button class="mobile-nav-item superior-only" data-page="auditLogs" onclick="nav('auditLogs')"><span class="mobile-nav-icon">📋</span>Audit</button>
+      <button class="mobile-nav-item admin-only active" data-page="dashboard"        onclick="nav('dashboard')">        <span class="mobile-nav-icon">🏠</span>Home</button>
+      <button class="mobile-nav-item admin-only"        data-page="students"         onclick="nav('students')">         <span class="mobile-nav-icon">👥</span>Students</button>
+      <button class="mobile-nav-item"                   data-page="attendance"       onclick="nav('attendance')">       <span class="mobile-nav-icon">✅</span>Attend.</button>
+      <button class="mobile-nav-item admin-only"        data-page="attendanceStatus" onclick="nav('attendanceStatus')"> <span class="mobile-nav-icon">📅</span>Status</button>
+      <button class="mobile-nav-item"                   data-page="examEntry"        onclick="nav('examEntry')">        <span class="mobile-nav-icon">✏️</span>Exam</button>
+      <button class="mobile-nav-item admin-only"        data-page="examResults"      onclick="nav('examResults')">      <span class="mobile-nav-icon">📊</span>Results</button>
+      <button class="mobile-nav-item admin-only"        data-page="backup"           onclick="nav('backup')">           <span class="mobile-nav-icon">💾</span>Backups</button>
+      <button class="mobile-nav-item superior-only"     data-page="payment"          onclick="nav('payment')">          <span class="mobile-nav-icon">💰</span>Pay</button>
+      <button class="mobile-nav-item superior-only"     data-page="paymentStatus"    onclick="nav('paymentStatus')">    <span class="mobile-nav-icon">📊</span>Status</button>
+      <button class="mobile-nav-item superior-only"     data-page="auditLogs"        onclick="nav('auditLogs')">        <span class="mobile-nav-icon">📋</span>Audit</button>
     </div>
   </div>
 </div>
 
-<!-- ══ MODALS ══════════════════════════════════════════ -->
+<!-- MODALS -->
 <div class="modal-overlay" id="studentModal">
   <div class="modal-box">
     <div class="modal-title" id="modalStudentName">Student</div>
     <div class="detail-grid" id="modalStudentDetails"></div>
-    <div id="modalAdminActions" style="display:none;margin-top:10px">
-      <button class="btn-sm danger" onclick="deleteStudent()" style="width:100%;padding:10px;border-radius:10px">🗑 Remove Student</button>
+    <div id="modalAdminActions" style="display:none;margin-top:12px">
+      <button class="btn-sm danger" onclick="deleteStudent()" style="width:100%;padding:11px;border-radius:11px;font-size:.85rem">🗑 Remove Student</button>
     </div>
     <div class="modal-actions"><button class="btn-cancel" onclick="closeModal('studentModal')">Close</button></div>
   </div>
@@ -962,10 +1031,7 @@ tr:hover td{background:var(--surface2)}
     <div class="form-row"><label class="form-label">Username</label><input class="form-inp" id="t_username"></div>
     <div class="form-row"><label class="form-label">Password</label><input class="form-inp" id="t_password" type="password"></div>
     <div class="form-row"><label class="form-label">Assigned Class</label><select class="form-inp" id="t_class"></select></div>
-    <div class="modal-actions">
-      <button class="btn-cancel" onclick="closeModal('teacherModal')">Cancel</button>
-      <button class="btn-save" onclick="saveTeacher()">Save Teacher</button>
-    </div>
+    <div class="modal-actions"><button class="btn-cancel" onclick="closeModal('teacherModal')">Cancel</button><button class="btn-save" onclick="saveTeacher()">Save Teacher</button></div>
   </div>
 </div>
 
@@ -976,44 +1042,32 @@ tr:hover td{background:var(--surface2)}
     <div class="form-row"><label class="form-label">Class Code</label><input class="form-inp" id="cc_code" placeholder="Auto-generated if empty"></div>
     <div class="form-row"><label class="form-label">Level</label><input class="form-inp" id="cc_level" placeholder="e.g. Grade 6"></div>
     <div class="form-row"><label class="form-label">Section</label><input class="form-inp" id="cc_section" placeholder="e.g. B"></div>
-    <div class="form-row">
-      <label class="form-label">Copy Settings From (Optional)</label>
-      <select class="form-inp" id="cc_template"><option value="">— No template —</option></select>
-    </div>
-    <div id="cc_template_info" style="font-size:0.78rem;color:var(--accent2);margin-top:-8px;margin-bottom:8px;display:none">✓ Will copy subjects and exam configuration from selected class</div>
-    <div class="modal-actions">
-      <button class="btn-cancel" onclick="closeModal('createClassModal')">Cancel</button>
-      <button class="btn-save" onclick="saveNewClass()">Create Class</button>
-    </div>
+    <div class="form-row"><label class="form-label">Copy Settings From (Optional)</label><select class="form-inp" id="cc_template"><option value="">— No template —</option></select></div>
+    <div id="cc_template_info" style="font-size:.78rem;color:var(--green);margin-top:-8px;margin-bottom:10px;display:none">✓ Will copy subjects and exam configuration from selected class</div>
+    <div class="modal-actions"><button class="btn-cancel" onclick="closeModal('createClassModal')">Cancel</button><button class="btn-save" onclick="saveNewClass()">Create Class</button></div>
   </div>
 </div>
 
 <div class="modal-overlay" id="assignStudentsModal">
   <div class="modal-box" style="max-width:540px">
     <div class="modal-title" id="assignModalTitle">Assign Students</div>
-    <div style="margin-bottom:12px">
-      <div class="form-label" style="margin-bottom:6px">Target Class: <strong id="assignTargetClass"></strong></div>
+    <div style="margin-bottom:14px">
+      <div class="form-label" style="margin-bottom:7px">Target Class: <strong id="assignTargetClass"></strong></div>
       <input class="search-inp" id="assignSearch" placeholder="🔍 Search students…" oninput="filterAssignList()" style="width:100%">
     </div>
-    <div id="assignStudentList" style="max-height:300px;overflow-y:auto;border:1px solid var(--border);border-radius:10px"></div>
-    <div class="modal-actions">
-      <button class="btn-cancel" onclick="closeModal('assignStudentsModal')">Cancel</button>
-      <button class="btn-save" onclick="saveStudentAssignment()">Move Selected Students</button>
-    </div>
+    <div id="assignStudentList" style="max-height:300px;overflow-y:auto;border:1px solid var(--border);border-radius:11px"></div>
+    <div class="modal-actions"><button class="btn-cancel" onclick="closeModal('assignStudentsModal')">Cancel</button><button class="btn-save" onclick="saveStudentAssignment()">Move Selected Students</button></div>
   </div>
 </div>
 
 <div class="modal-overlay" id="editClassModal">
   <div class="modal-box">
     <div class="modal-title">Edit Class</div>
-    <div class="form-row"><label class="form-label">Class Name</label><input class="form-inp" id="ec_name" disabled style="opacity:0.5"></div>
+    <div class="form-row"><label class="form-label">Class Name</label><input class="form-inp" id="ec_name" disabled style="opacity:.5"></div>
     <div class="form-row"><label class="form-label">Class Code</label><input class="form-inp" id="ec_code"></div>
     <div class="form-row"><label class="form-label">Level</label><input class="form-inp" id="ec_level"></div>
     <div class="form-row"><label class="form-label">Section</label><input class="form-inp" id="ec_section"></div>
-    <div class="modal-actions">
-      <button class="btn-cancel" onclick="closeModal('editClassModal')">Cancel</button>
-      <button class="btn-save" onclick="saveEditClass()">Save Changes</button>
-    </div>
+    <div class="modal-actions"><button class="btn-cancel" onclick="closeModal('editClassModal')">Cancel</button><button class="btn-save" onclick="saveEditClass()">Save Changes</button></div>
   </div>
 </div>
 
@@ -1023,16 +1077,12 @@ tr:hover td{background:var(--surface2)}
     <div class="form-row"><label class="form-label">Full Name</label><input class="form-inp" id="sa_name"></div>
     <div class="form-row"><label class="form-label">Username</label><input class="form-inp" id="sa_username"></div>
     <div class="form-row"><label class="form-label">Password</label><input class="form-inp" id="sa_password" type="password"></div>
-    <div class="modal-actions">
-      <button class="btn-cancel" onclick="closeModal('adminModal')">Cancel</button>
-      <button class="btn-save" onclick="saveAdmin()">Save Admin</button>
-    </div>
+    <div class="modal-actions"><button class="btn-cancel" onclick="closeModal('adminModal')">Cancel</button><button class="btn-save" onclick="saveAdmin()">Save Admin</button></div>
   </div>
 </div>
 
 <div id="toast"></div>
 
-<!-- Sidebar toggle JS (UI only, no logic) -->
 <script>
 function toggleSidebar(){
   document.getElementById('sidebar').classList.toggle('open');
@@ -1042,16 +1092,12 @@ function closeSidebar(){
   document.getElementById('sidebar').classList.remove('open');
   document.getElementById('sidebarOverlay').classList.remove('open');
 }
-// Close sidebar when nav item clicked on mobile
 document.addEventListener('DOMContentLoaded',function(){
   document.querySelectorAll('.nav-item').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      if(window.innerWidth<=720) closeSidebar();
-    });
+    btn.addEventListener('click',function(){ if(window.innerWidth<=720) closeSidebar(); });
   });
 });
 </script>
-
 <script>
 const CLASSES = ["KG Xarunta","KG Faraca","KG Galbeedka","Grade 1 Xarunta","Grade 1 Faraca","Grade 1 Galbeedka","Grade 2 Xarunta","Grade 2 Faraca","Grade 3 Xarunta","Grade 3 Faraca","Grade 4 Xarunta","Grade 4 Faraca","Grade 5 Xarunta","Grade 5 Faraca","Grade 6","Grade 7","Grade 8","Graduated"];
 const SUBJECTS = {
@@ -3359,4 +3405,4 @@ document.addEventListener('keydown', e => {
   </div>
 </div>
 </body>
-</html>
+  </html>
