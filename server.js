@@ -7,7 +7,8 @@ const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
 const backup = require('./backup');
-const audit  = require('./audit');
+const audit   = require('./audit');
+const classes = require('./classes');
 
 // ── FAIL FAST: refuse to start without JWT_SECRET ──
 if (!process.env.JWT_SECRET) {
@@ -22,7 +23,7 @@ const PORT = process.env.PORT || 10000;
 
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 // ── DATABASE SETUP ──
 const dbPath = process.env.DB_PATH || path.join(__dirname, 'school.db');
@@ -81,6 +82,12 @@ db.exec(`
     key TEXT UNIQUE NOT NULL,
     value TEXT NOT NULL
   );
+`);
+
+// ── CLASS MANAGEMENT SCHEMA ──
+classes.createSchema(db);
+
+db.exec(`
 
   CREATE TABLE IF NOT EXISTS attendance (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -241,10 +248,11 @@ function migrateStudentIds() {
     }
   });
   migrate();
-  console.log(`[migration] Assigned Student IDs to ${missing.length} students (up to ASS- ${String(counter).padStart(4,'0')})`);
+  console.log(\`[migration] Assigned Student IDs to \${missing.length} students (up to ASS-\${String(counter).padStart(4,'0')})\`);
 }
 
 migrateStudentIds();
+classes.seedClasses(db);
 
 // ── EXAM MARKS + ACADEMIC YEAR MIGRATION ──
 (function migrateExamMarks() {
@@ -647,6 +655,9 @@ app.get('/api/payments/student/:id', authMiddleware, requireRole('superadmin'), 
   res.json(rows);
 });
 
+// ── CLASS ROUTES ──
+app.use('/api/classes', classes.buildRouter(db, authMiddleware, requireRole, audit));
+
 // ── AUDIT ROUTES ──
 app.use('/api/audit', audit.buildRouter(db, authMiddleware, requireRole));
 
@@ -741,6 +752,18 @@ app.get('/api/promotions/history', authMiddleware, requireRole('superadmin','adm
   if (academic_year) { q += ' AND p.academic_year=?'; params.push(academic_year); }
   q += ' ORDER BY p.promoted_at DESC';
   res.json(db.prepare(q).all(...params));
+});
+
+// ── DYNAMIC CLASSES LIST (used by frontend to build CLASSES array) ──
+app.get('/api/classes-list', authMiddleware, (req, res) => {
+  try {
+    const rows = db.prepare(
+      "SELECT class_name FROM classes WHERE status='active' ORDER BY level, section, class_name"
+    ).all();
+    res.json(rows.map(r => r.class_name));
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // ── HEALTH CHECK ──
