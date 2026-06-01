@@ -23,7 +23,7 @@ const PORT = process.env.PORT || 10000;
 
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // ── DATABASE SETUP ──
 const dbPath = process.env.DB_PATH || path.join(__dirname, 'school.db');
